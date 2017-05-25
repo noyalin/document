@@ -1,0 +1,441 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.5;
+    font-family: Arial, sans-serif;
+}
+
+/*头部*/
+.header {
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background: #373942;
+    padding: 20px 0;
+    color: #fff;
+    font-size: 20px;
+}
+
+.header .nav_bar {
+    width: 1288px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header p {
+    width: 1228px;
+    margin: 0 -45px;
+    text-align: left;
+}
+
+.header a {
+     color: white;
+     float: left;
+ }
+
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.header a:hover{
+    color: #DBDBDB;
+}
+.header .nav {
+    margin-left:200px;
+    overflow: hidden;
+}
+
+.header .nav li {
+    float: left;
+    margin-right: 30px;
+}
+
+.header .nav li a{
+    text-align: center;
+
+}
+
+.ms-fl {
+    float: left;
+}
+
+.ms-fr {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+.voyaMain {
+    width: 1288px;
+    margin: 10px auto;
+    min-height: 800px;
+}
+
+.voyaLeft {
+    width: 205px;
+}
+.iframeHead {
+    width: 100%;
+}
+#iframepage {
+    width: 100%;
+    min-height: 800px;
+}
+
+.menuBox {
+    padding: 0 10px 20px;
+    background: #f5f5f5;
+}
+
+.menuBox h2 {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+ul.menu-1 {
+    text-indent: 20px;
+}
+
+ul.menu-2 {
+    text-indent: 40px;
+}
+
+ul.menu-3 {
+    text-indent: 60px;
+}
+
+ul.menu li {
+    width: 220px;
+    line-height: 2.2em;
+    min-height: 30px;
+}
+
+ul.menu li a {
+    display: block;
+    width: 205px;
+    height: 100%;
+}
+
+ul.menu li a:hover {
+    color: #0089cd;
+}
+
+ul.menu-1 li a {
+    background: url(01.png) 10px center no-repeat;
+}
+
+ul.menu-2 li a {
+    background: url(01.png) 30px center no-repeat;
+}
+
+ul.menu-3 li a {
+    background: url(01.png) 50px center no-repeat;
+}
+
+ul.menu-1 li a:hover {
+    background: url(01.png) 10px center no-repeat #ddecf4;
+}
+
+ul.menu-2 li a:hover {
+    background: url(01.png) 30px center no-repeat #ddecf4;
+}
+
+ul.menu-3 li a:hover {
+    background: url(01.png) 50px center no-repeat #ddecf4;
+}
+
+ul.menu-1 li a.openNow {
+    background: url(02.png) 10px center no-repeat;
+}
+
+ul.menu-1 li a.openNow:hover {
+    background: url(02.png) 10px center no-repeat #ddecf4;
+}
+
+ul.menu-2 li a.openNow {
+    background: url(02.png) 30px center no-repeat;
+}
+
+ul.menu-2 li a.openNow:hover {
+    background: url(02.png) 30px center no-repeat #ddecf4;
+}
+
+ul.menu-3 li a.openNow {
+    background: url(05.png) 10px center no-repeat;
+}
+
+ul.menu-3 li a.openNow:hover {
+    background: url(05.png) 10px center no-repeat #ddecf4;
+}
+
+ul.menu li ul {
+    /*display: none;*/
+}
+
+ul.menu li a.menu-now ul {
+    display: block;
+}
+
+/*artBox*/
+
+.artBox {
+    width: 900px;
+    line-height: 1.5em;
+    position: relative;
+    padding-left: 20px;
+}
+
+.artBox img {
+    max-width: 898px;
+    vertical-align: bottom;
+    margin: 0px;
+    border: 1.5px solid lightgray;
+    border-radius: 12.5px;
+    border-style: outset;
+    margin: 12px 0;
+}
+
+.artBox h1 {
+    padding: 5px 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.artBox h2 {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.artBox h3 {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.artBox h4 {
+    padding: 5px 0;
+}
+
+.artBox h5 {
+    padding: 5px 0;
+}
+
+/* sofia03-03 图表脚注样式*/
+
+.artBox div h6 {
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 6px;
+}
+
+.artBox blockquote p,
+div p {
+    text-indent: 2em;
+    padding: 1.5px 0;
+}
+
+.artBox blockquote p.sec {
+    text-indent: 3.5em;
+    padding: 1px 0;
+}
+
+.artBox blockquote p.third {
+    text-indent: 5.5em;
+    padding: 1px 0;
+}
+
+.artBox blockquote p:before {
+    position: absolute;
+    left: 0;
+    margin-left: -10px;
+}
+
+.artBox ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.artBox ul li {
+    list-style: disc inside;
+    padding: 1px 0;
+}
+
+.artBox ul li span {
+    border-bottom: 1px solid #ADD8E6;
+    padding: 0 12px;
+}
+
+.artBox .index {
+    background-color: #EEEEEE;
+}
+
+.artBox ul li.third {
+    list-style: none;
+}
+
+/* sofia03-01目录颜色设置 */
+
+.TOC {
+    width: 165px;
+    margin-top: 90px;
+    margin-left: 1132px;
+    position: fixed;
+}
+
+.TOC a {
+    font-size: 12px;
+    color: #666;
+}
+
+.TOC li:hover {
+    background-color: #ddecf4;
+}
+
+.TOC li a:hover {
+    color: #0089cd;
+}
+
+.TOC li {
+    border-left: 2px solid #ddd;
+    padding: 2px 12px;
+}
+
+.TOC li a.return_top {
+    background: url(../img/oms/返回顶部.gif) no-repeat;
+    background-position: 53px 2px;
+    display: block;
+    width: 90px;
+    border-top: 1px dotted #666;
+}
+
+/* sofia03-01 区块背景色等样式 */
+
+.artBox blockquote {
+    padding: 0 15px;
+    color: #777;
+    border-left: 4px solid #ddd;
+}
+
+/* sofia03-01 代码区高亮显示 */
+
+.artBox code {
+    padding: 0;
+    padding: 0.3em 0.3em;
+    margin: 0;
+    background-color: #ffd7aa;
+    border-radius: 3px;
+}
+
+.artBox code.sec {
+    padding: 0;
+    padding: 0.3em 0.3em;
+    margin: 0;
+    background-color: #aad7ff;
+    border-radius: 3px;
+}
+
+.artBox code.third {
+    padding: 0;
+    padding: 0.3em 0.3em;
+    margin: 0;
+    background-color: #ffaad7;
+    border-radius: 3px;
+    color: black;
+}
+
+.artBox .codehilite {
+    padding: 2px;
+    /* Edited 20160303 vantis*/
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+
+/* sofia03-01 表格相关的样式 */
+
+.artBox table {
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 12px 0;
+}
+
+.artBox .tab1 td {
+    text-align: center;
+}
+
+.artBox thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.artBox table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+.artBox table tr.over td {
+    background: #bcd4ec;
+}
+
+.artBox table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+
+.artBox table th,
+table td {
+    border: 1px solid darkgray;
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    padding: 4px 4px 2px 10px;
+    color: #4f6b72;
+}
+
+.artBox table th {
+    font-weight: bold;
+    padding: 4px 12px;
+    text-align: center;
+    color: #fff;
+}
+
+.artBox tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.artBox th {
+    color: white;
+    background-color: #5d9cec;
+}

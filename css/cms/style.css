@@ -1,0 +1,30 @@
+.important{
+    border-radius:0px!important;
+    width:20px!important;
+    border:none!important;
+}
+h3{
+    line-height:41px;
+}
+.toggle, /* 1 */
+.toggle:not(:checked) ~ .toggled /* 2 */ {
+      clip: rect(0 0 0 0);
+      height: 1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+      margin:20px auto;
+}
+.toggled img{
+    width:98%!important;
+}
+.toggle:focus ~ label {
+  color: deeppink;
+}
+
+label {
+  border: 1px solid;
+  padding: 20px 30%;
+  cursor: pointer;
+}
