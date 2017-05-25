@@ -4,25 +4,75 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title></title>
     <link href="css/voyageone.css" rel="stylesheet" type="text/css" media="all">
-    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
-    <script src="https://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
 
 </head>
 <body>
-<div  ng-view=""></div>
+<div style="width: 100%;height: 90px;">
+    <iframe src="html/iframe/head.html"  class="iframeHead" frameborder="0" scrolling="no"></iframe>
+</div>
+<div class="voyaMain">
+    <div class="voyaLeft ms-fl menuBox">
+        <a class="index" target="_blank" title="API"><h2>Home</h2></a>
+        <ul class="menu menu-1">
+            <li>
+                <a class="open" href="#/ng_home/home_general">General</a>
+            </li>
+            <li>
+                <a class="open" href="#/ng_home/home_io" target="_blank">Integration Overview</a>
+            </li>
+            <li>
+                <a class="open" href="#/ng_home/home_re" >Requirements</a>
+                <ul class="menu menu-2">
+                    <li>
+                        <a class="open" href="#/ng_home/home_td" target="_blank">Template Definition</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="voyaRig artBox ms-fl">
+        <div ng-view=""></div>
+        <div class="clear"></div>
+    </div>
+</div>
 <script type="text/javascript">
     angular.module('ngRouteExample', ['ngRoute'])
-        .controller('HomeController', function ($scope, $route) { $scope.$route = $route;})
-        .config(function ($routeProvider) {
-            $routeProvider.
-            when('/', {
-                templateUrl: 'html/home/home_general.html',
-                controller: 'HomeController'
-            }).
-            otherwise({
-                redirectTo: '/html/home/home_general.html'
+            .controller('home_io_ctrl', function ($scope, $route) {
+                $scope.$route = $route;
+            })
+            .controller('home_general_ctrl', function ($scope, $route) {
+                $scope.$route = $route;
+            })
+            .controller('home_re_ctrl', function ($scope, $route) {
+                $scope.$route = $route;
+            })
+            .controller('home_td_ctrl', function ($scope, $route) {
+                $scope.$route = $route;
+            })
+            .config(function ($routeProvider) {
+                $routeProvider
+                        .when('/ng_home/home_io', {
+                            templateUrl: 'html/ng_home/home_io.html',
+                            controller: 'home_io_ctrl'
+                        })
+                        .when('/ng_home/home_general', {
+                            templateUrl: 'html/ng_home/home_general.html',
+                            controller: 'home_general_ctrl'
+                        })
+                        .when('/ng_home/home_re.', {
+                            templateUrl: 'html/ng_home/home_re.html',
+                            controller: 'home_re_ctrl'
+                        })
+                        .when('/ng_home/home_td', {
+                            templateUrl: 'html/ng_home/home_td.html',
+                            controller: 'home_td_ctrl'
+                        })
+                        .otherwise({
+                            redirectTo: '/ng_home/home_general'
+                        });
             });
-        });
 </script>
 </body>
 

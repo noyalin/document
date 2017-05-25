@@ -23,7 +23,7 @@ body {
 }
 
 .header .nav_bar {
-    width: 1288px;
+    width: 1200px;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -84,7 +84,7 @@ li {
 }
 
 .voyaMain {
-    width: 1288px;
+    width: 1200px;
     margin: 10px auto;
     min-height: 800px;
 }
@@ -94,6 +94,7 @@ li {
 }
 .iframeHead {
     width: 100%;
+    height: 90px;
 }
 #iframepage {
     width: 100%;
@@ -101,7 +102,6 @@ li {
 }
 
 .menuBox {
-    padding: 0 10px 20px;
     background: #f5f5f5;
 }
 
@@ -115,6 +115,7 @@ li {
 
 ul.menu-1 {
     text-indent: 20px;
+    padding-bottom: 10px;
 }
 
 ul.menu-2 {
@@ -218,7 +219,7 @@ ul.menu li a.menu-now ul {
 
 .artBox h1 {
     padding: 5px 0;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-size: 24px;
     font-weight: bold;
 }
