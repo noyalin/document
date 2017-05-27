@@ -1,0 +1,208 @@
+<h1>Get products API Endpoint </h1>
+<blockquote>API endpoint information</blockquote>
+<h3>URL: https://{your.domain.com}/products?groupFields={groupFields}&amp;buyableFields={buyableFields}</h3>
+<h3>Method: GET</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>buyableFields</td>
+        <td class="text-center ">False</td>
+        <td>A list of BuyableProduct field names to return. If this query string is not provided or is empty, buyable
+            fields should be returned as an empty collection.
+        </td>
+    </tr>
+    <tr>
+        <td>groupFields</td>
+        <td class="text-center ">False</td>
+        <td>A list of ProductGroup field names to return. If this query string is not provided or is empty, group fields
+            should be returned as an empty collection.
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Asynchronous response support</h3>
+<p>Voyageone currently supports both synchronous and asynchronous responses from this endpoint.</p>
+<h3>Description</h3>
+<p>Returns a list of all products on the marketplace</p>
+<h3>Request Format</h3>
+<p>This endpoint does not accept a request body.</p>
+<h3>Response Format</h3>
+<p>This endpoint returns a/n <a class="link" href="#/ng_api/api_r_m_productgroup">ProductGroup</a> array as its response
+    body (example below):</p>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "title",</li>
+            <li> "Value": "Rebel X-Wing"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "description",</li>
+            <li> "Value": "Got a Death Star porblem at your base? Take it out with this small craft (PS, aim for the
+                2-meter exhaust port). Buy now! Republic credits not accepted."
+            </li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "category",</li>
+            <li> "Value": "Transportation : Spacecraft : Single-Passenger"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "brand",</li>
+            <li> "Value": "Rebel Forces, Inc."</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "productgroupimageurl1",</li>
+            <li> "Value":
+                "http://courses.cs.washington.edu/courses/cse455/08wi/projects/project3/web/artifacts/jonobird-ncall/artifact/xw1.jpg"
+            </li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "Quantity": 23,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "100.00"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "gray"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "one-man"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "title",</li>
+            <li> "Value": "Lightsaber"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "description",</li>
+            <li> "Value": "This is the weapon of a Jedi Knight. Not as clumsy or random as a blaster; an elegant weapon
+                for a more civilized age."
+            </li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "category",</li>
+            <li> "Value": "Civilized Weapons"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "brand",</li>
+            <li> "Value": "Jedi Knights"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "productgroupimageurl1",</li>
+            <li> "Value":
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Dueling_lightsabers.svg/2000px-Dueling_lightsabers.svg.png"
+            </li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "Quantity": 14,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "14.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "red"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "medium"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "Quantity": 9,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "15.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "red"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "large"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "Quantity": 17,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "11.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "blue"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "medium"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "Quantity": 15,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "12.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "blue"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "large"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

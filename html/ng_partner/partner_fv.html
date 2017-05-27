@@ -1,0 +1,352 @@
+<!-- 文章开始 -->
+<h1>Test Scenarios</h1>
+<blockquote>API Test & Validation Process</blockquote>
+<p>
+    Below are the test scenarios that we will run in order to verify the partner’s integration during the final
+    verification phase.
+    The table below details the various test cases Voyageone will be executing and the expected responses from the
+    Partner’s API.
+    <br>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>
+            <center>Test Cases</center>
+        </th>
+        <th>
+            <center>Expected Response per Test Case</center>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <center>Products</center>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <ul>
+                <li>Publish a standalone product</li>
+                <li>Publish a variation group of products</li>
+                <li>Publish a standalone product with 0 quantity</li>
+                <li>Publish a variation group of products where one of the buyable products has quantity=0</li>
+                <li>Publish a product with a bad image - has a valid URL path</li>
+                <li>Publish a product with no image</li>
+                <li>Update images on a buyable product</li>
+                <li>Add a new product where SellerSKU contains the special characters !"£$%^&amp;*()_+{}[]:@~;'#&lt;&gt;?,.//*-
+                    +
+                </li>
+                <li>Add a new product to the product group</li>
+                <li>Update quantity on only one product in a variation grouping</li>
+                <li>Update quantity on a standalone buyable product</li>
+                <li>Update price and quantity on a product simultaneously</li>
+                <li>Update price on a buyable product</li>
+                <li>Update product description on a buyable product</li>
+                <li>Update non-required numeric product fields (i.e. MSRP, ratings, etc.)</li>
+                <li>Update non-required Date/Time product fields</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>ResponseStatus=Complete</li>
+                <li>If there is a data problem with the product then</li>
+                <ul>
+                    <li>ResponseStatus=CompleteWithErrors</li>
+                    <li>Errors are at the BuyableProduct level.</li>
+                    <li>Error Message field is included and gives a clear message to sellers what data needs to be
+                        fixed.
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Product with missing required data fields</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>ResponseStatus of CompleteWithErrors</li>
+                <li>Code <i>ProductMissingRequiredFields</i> or <i>ProductFailedDataValidation</i></li>
+                <li>Errors are at the BuyableProduct level</li>
+                <li>Error Message field is included and gives a clear message to sellers what data needs to be fixed
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Product with an invalid GTIN</li>
+                <li>Product with an invalid category value</li>
+                <li>Product with a missing category field value</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>If no validation is needed on these fields ResponseStatus=Complete</li>
+                <li>If your channel verifies the validity of GTIN and the GTIN is invalid then</li>
+                <ul>
+                    <li>ResponseStatus should be CompleteWithErrors</li>
+                    <li>Errors are at the BuyableProduct level</li>
+                    <li>The error message field is included and gives a clear message to sellers that the GTIN is
+                        invalid
+                    </li>
+                </ul>
+                <li>If your channel verifies the validity of category and the category is invalid then</li>
+                <ul>
+                    <li>ResponseStatus should be CompleteWithErrors</li>
+                    <li>Errors are at the BuyableProduct level</li>
+                    <li>The error message field is included and gives a clear message to sellers that the category is
+                        invalid
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Seller account has invalid credentials</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Response level system error of <i>AuthorizationFailure</i>, <i>InvalidToken</i>, or <i>InvalidSellerID</i>
+                    as appropriate.
+                </li>
+                <li>Error Message field is included and gives a clear message to sellers what account setting needs to
+                    be fixed.
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Buyable product is unpublished, i.e. set to ListingStatus=NotLive</li>
+                <li>Buyable product in variation group is unpublished (set to NotLive)</li>
+                <li>Buyable product in variation group status change to NotLive with qty=0</li>
+                <li>Buyable product (non-variation) status change to NotLive with qty=0</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Response of Success at the Buyable Product level</li>
+                <li>Listing Status set to NotLive - product is no longer buyable or visible on marketplace</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <center>Orders</center>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Order with a single quantity of a single SellerSKU where the Order Status = ReleasedForShipment</li>
+                <li>Order with multiple quantity of a single SellerSKU where the Order Status = ReleasedForShipment</li>
+                <li>Order with multiple quantity of multiple SellerSKUs where the Order Status = ReleasedForShipment
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>If all required order fields are verified and the order total math adds up correctly, Access
+                    Voyageone’s API will send an acknowledge request.
+                </li>
+                <li>The acknowledge response Status is Complete with no errors.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Cancellation of an unshipped order with a single SellerSKU with a quantity of 1. Cancellation is for
+                    full order quantity.
+                </li>
+                <li>Cancellation of an unshipped order with a single SellerSKU with multiple quantity. Cancellation is
+                    for full order quantity.
+                </li>
+                <li>Cancellation of an unshipped order with multiple SellerSKUs, each with multiple quantity.
+                    Cancellation is for full order - all products and quantity.
+                </li>
+                <li>Refund a shipped order for a single SellerSKU with a quantity of 1. Refund is for full order
+                    quantity.
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>The response Status is Complete with no errors.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Refund part of the quantity of a shipped order that contains one SellerSKU with multiple quantity.
+                </li>
+                <li>Refund part of a shipped order by refunding full quantity of only one SellerSKU on a multiple
+                    SellerSKU order.
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>The response Status is Complete with no errors.</li>
+                <li>If partial quantity refunds are not supported by your system, a proper response is</li>
+                <ul>
+                    <li>Status=Failed</li>
+                    <li>ErrorID = 6200 or 6000</li>
+                    <li>A Message in Errors that will effectively tell the seller why the refund failed so that they may
+                        fix the issue
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship all of an order with a single SellerSKU that has only one quantity. The shipment contains a
+                    value for ShippingCarrier, ShippingClass, and TrackingNumber.
+                </li>
+                <li>Ship all of an order with multiple SellerSKUs that have multiple quantity. The shipment contains a
+                    value for ShippingCarrier, ShippingClass, and TrackingNumber.
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>The response Status is Complete with no errors.</li>
+                <li>If your system only accepts a particular set of shipping carriers and classes or validates tracking
+                    numbers, a proper response on invalid shipment values is
+                </li>
+                <ul>
+                    <li>Status=Failed</li>
+                    <li>ErrorID of 400, 401, or 402</li>
+                    <li>A Message in Errors that will effectively tell the seller why the shipment failed so that they
+                        may fix the issue
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship part of the quantity of a multiple quantity SellerSKU on an order. The partial quantity
+                    shipment contains a value for ShippingCarrier, ShippingClass, and TrackingNumber.
+                </li>
+                <li>Ship one SellerSKU of an order containing multiple SellerSKUs. The partial shipment contains a value
+                    for ShippingCarrier, ShippingClass, and TrackingNumber.
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>The response Status is Complete with no errors.</li>
+                <li>If your system does not accept partial shipment requests (i.e. only full quantity of a SellerSKU), a
+                    proper response is
+                </li>
+                <ul>
+                    <li>Status = Failed</li>
+                    <li>ErrorID of 6100 (ShipmentFailed)</li>
+                    <li>A Message in Errors that will effectively tell the seller why the shipment failed and that the
+                        form of shipment request is not supported
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship the SellerSKUs in a multiple SellerSKU order with different ShippingClass and TrackingNumber
+                    values, i.e. in different boxes. For example, SKU1 on the order with UPS Ground and tracking number
+                    1234 and SKU2 with UPS Overnight and tracking number 54321.
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Each SellerSKU shipment will be in a different request. For each request, the response has a status
+                    of Complete with no errors.
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship the SellerSKUs on an order with an invalid postal carrier.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>If your system validates the shipping carrier on a shipment, a proper response on an invalid carrier
+                    is
+                </li>
+                <ul>
+                    <li>Status = Failed</li>
+                    <li>ErrorID of 401 (InvalidShippingCarrier)</li>
+                    <li>A Message in Errors that will effectively tell the seller why the shipment failed so that they
+                        may fix the data.
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship the SellerSKUs on an order with an invalid postal class (i.e. “UPS Invalid” as a carrier and
+                    class combination).
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>If your system validates the shipping class on a shipment, a proper response on an invalid class
+                    is
+                </li>
+                <ul>
+                    <li>Status = Failed</li>
+                    <li>ErrorID of 402 (InvalidShippingClass)</li>
+                    <li>A Message in Errors that will effectively tell the seller why the shipment failed so that they
+                        may fix the data.
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Ship the SellerSKUs on an order with an invalid tracking number (i.e. “1234Z56ABC”).</li>
+                <li>Ship the SellerSKUs on an order with no tracking number.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>If your system validates the shipping class on a shipment, a proper response on an invalid class
+                    is
+                </li>
+                <ul>
+                    <li>Status = Failed</li>
+                    <li>ErrorID of 400 (InvalidTrackingNumber)</li>
+                    <li>A Message in Errors that will effectively tell the seller why the shipment failed so that they
+                        may fix the data.
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+<!-- 文章开始 -->
+<h1>Rate Limiting</h1>
+<blockquote>options for rate limiting requests from Voyageone.</blockquote>
+<p>
+    Voyageone will adhere to the rate limits agreed upon on the site configuration specification.
+    It is recommended that the API also enforce similar rate limits to ensure that both systems are operating
+    within the expected parameters. Some considerations to include when deciding on a rate limit:
+</p>
+<ul>
+    <li>Number of products per account</li>
+    <li>Each seller will be restricted to a predefined number of products they can list on your site.</li>
+    <li>
+        The API rate limits should be calculated such that each product could be updated within a reasonable window.
+        Excessive rate limiting can hinder a seller’s ability to manage multiple site listings.
+    </li>
+    <li>Rate limit for API requests per account</li>
+    <li>
+        Support for rate limiting requests per time interval will be supported. This can be defined at a seller
+        or integration level. Example, 1000 requests per minute per seller.
+    </li>
+    <li>SLAs for responses to API requests</li>
+</ul>
+Should the rate limit be exceeded, the API response should return the following Error:
+<p></p>
+<table>
+    <thead>
+    <tr>
+        <th>Error ID</th>
+        <th>Example Error Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>3002 (RateLimitExceeded)</td>
+        <td>Rate limit exceeded. Please throttle your requests</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Example error response</h3>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li>&nbsp;&nbsp; "Status": "Fail",</li>
+            <li>&nbsp;&nbsp; "PendingUri": null,</li>
+            <li>&nbsp;&nbsp; "Errors": [</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "ID": "RateLimitExceeded",</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "ErrorCode": "300",</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "Message": "Rate limit exceeded. Please throttle your
+                requests."
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</li>
+            <li>&nbsp;&nbsp; ],</li>
+            <li>&nbsp;&nbsp; "ResponseBody": null</li>
+            <li> }</li>
+        </ol>
+    </div>
+</blockquote>

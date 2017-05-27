@@ -1,0 +1,18 @@
+<h1>Orders - Communication Flow</h1>
+<blockquote>An overview of the order management process</blockquote>
+<p>
+    <img src="../img/OrderManagement.png">
+</p>
+<h4>Order Management</h4>
+<p>
+    During the order management process, Voyageone will perform multiple actions that involve orders. Our system will
+    first request a list of orders
+    with the status "ReleasedForShipment", which will then be imported into our system. For each order that is imported,
+    Voyageone will send an
+    order acknowledgement to the partner, indicating a successful import. Next, the process will send shipment updates
+    per order to the partner for all orders
+    the Seller has marked as "shipped" in Voyageone. The final part of the process will send either refund or
+    cancellation requests for orders that the Seller
+    has marked as such in Voyageone. This process executes on a schedule, which can be customized based on the partner's
+    preference.
+</p>

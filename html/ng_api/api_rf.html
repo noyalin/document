@@ -1,0 +1,37 @@
+<!-- 文章开始 -->
+<h1>Response Format</h1>
+<blockquote>Outlines the acceptable formats of API responses.</blockquote>
+<p>
+    All response payloads from the API should be in the form of a JSON-serialized <a class="link"
+                                                                                     href="#/ng_api/api_r_m_actionresponse">ActionResponse</a>.
+    At the root level, this model contains several key properties:
+</p>
+<ul>
+    <li>a status indicating the over all success or failure of the request as a whole</li>
+    <li>a collection of <a class="link" href="#/ng_api/api_r_m_error">Error</a> objects to report any
+        response-level errors
+    </li>
+    <li>a string to return a batch response URL (if the response is status pending)</li>
+    <li>the actual data of the response (an object or a list of objects)</li>
+</ul>
+<p>
+    If the response is pending, or if a <a class="link" href="#/ng_api/api_e_overview">response-level error</a>
+    occurs, the ResponseBody property of the payload may be returned as null since there is no data to return in these
+    cases.
+    However, all successful, non-pending responses must return a valid non-null object matching the type
+    detailed in the appropriate endpoint specification.
+</p>
+
+<h3>Example Response</h3>
+<blockquote>
+    <div class="codehilite">
+        <ul>
+            <li>1.{</li>
+            <li>2.&nbsp;&nbsp; "ResponseBody": {},</li>
+            <li>3.&nbsp;&nbsp; "Status": "Complete",</li>
+            <li>4.&nbsp;&nbsp; "PendingUri": null,</li>
+            <li>5.&nbsp;&nbsp; "Errors": []</li>
+            <li>6. }</li>
+        </ul>
+    </div>
+</blockquote>

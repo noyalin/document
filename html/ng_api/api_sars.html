@@ -1,0 +1,89 @@
+<h1>Synchronous and Asynchronous Response Support</h1>
+<blockquote>Details regarding synchronous and synchronous response support</blockquote>
+<p>
+
+    Both synchronous and asynchronous responses utilize the same
+    <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a> model, but display a different status.
+</p>
+
+<h3>Synchronous Responses</h3>
+<p>
+    Synchronous repsonses are the preferred option in every case; always try to return synchronous
+    responses when your system supports them. Synchronous repsonses must always have
+    a <a class="link" href="#/ng_api/api_r_m_responsestatus">ResponseStatus</a> that is not 0 / AsyncResponsePending.
+</p>
+<h5>Example Synchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
+<blockquote>
+    <div class="codehilite">
+        <ul>
+            <li>1.{</li>
+            <li>2.&nbsp;&nbsp; "ResponseBody": {},</li>
+            <li>3.&nbsp;&nbsp; "Status": "Complete",</li>
+            <li>4.&nbsp;&nbsp; "PendingUri": null,</li>
+            <li>5.&nbsp;&nbsp; "Errors": []</li>
+            <li>6. }</li>
+        </ul>
+    </div>
+</blockquote>
+
+<h3>Asynchronous Responses</h3>
+<p>
+    It is possible that your system may not be able to perform some operations synchronously.
+    For example, creating hundreds of product listings may take a few minutes to process,
+    longer to process than is reasonable to wait for an HTTP response.
+    In these cases, your API will return a null ResponseBody in its <a class="link"
+                                                                       href="#/ng_api/api_r_m_actionresponse">ActionResponse</a>
+    and a fully-qualified URL for ChannelAdvisor to poll.
+</p>
+
+<h5>Example Asynchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
+<blockquote>
+    <div class="codehilite">
+        <ul>
+            <li>1.{</li>
+            <li>2.&nbsp;&nbsp; "ResponseBody": null,</li>
+            <li>3.&nbsp;&nbsp; "Status": "AsyncResponsePending",</li>
+            <li>4.&nbsp;&nbsp; "PendingUri": "http://api.your-url.com/v1/pending-responses?workItemID=123456",</li>
+            <li>5.&nbsp;&nbsp; "Errors": []</li>
+            <li>6. }</li>
+        </ul>
+    </div>
+</blockquote>
+
+<p>
+    ChannelAdvisor will poll that URL every few seconds until it returns a valid response with a finalized
+    <a class="link" href="#/ng_api/api_r_m_responsestatus">ResponseStatus</a> (not 0 / AsyncResponsePending).
+</p>
+
+<h5>Example Finalized Asynchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
+<blockquote>
+    <div class="codehilite">
+        <ul>
+            <li>1.{</li>
+            <li>2.&nbsp;&nbsp; "ResponseBody": {},</li>
+            <li>3.&nbsp;&nbsp; "Status": "Complete",</li>
+            <li>4.&nbsp;&nbsp; "PendingUri": null,</li>
+            <li>5.&nbsp;&nbsp; "Errors": []</li>
+            <li>6. }</li>
+        </ul>
+    </div>
+</blockquote>
+
+<h3 id="async-timeout">Asynchronous Polling Timeout</h3>
+<p>
+    Because the ChannelAdvisor integration currently utilizes a synchronous feed process that waits for
+    asynchronous responses to complete, no other work can continue for a feed while the feed waits
+    for the polling URL to return a final status. For this reason, all asynchronous repsonses must
+    complete within the configured asynchronous response timeout window (5 minutes by default).
+    If your API is unable to respond within the allowed time window, the integration will give up,
+    error the request internally, and move on to other work. This timeout will be treated as a
+    <a class="link" href="#/ng_api/api_e_overview">system error</a>.
+    Currently, the only exception to this rule is the
+    <a class="link" href="#/ng_api/api_r_e_createupdate">Create and update products</a> endpoint
+    when the <a class="link" href="#/ng_api/api_overview">Long-running batch workflow</a>
+    is being used.
+</p>
+<p>
+    If you find that a 5 minute timeout is insufficient for your system, please
+    <a class="link" href="mailto:channelsync+voyageone@channeladvisor.com">email your technical contact</a>.
+</p>

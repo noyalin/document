@@ -1,0 +1,103 @@
+<h1>All API Endpoints </h1>
+<blockquote>API endpoint information</blockquote>
+<p>Please select an endpoint from the list below</p>
+<h3>Products Endpoints</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="max-width: 20em; width: 20em;">Endpoint</th>
+        <th>URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_gp">Get products</a>
+        </td>
+        <td>GET /products?groupFields={groupFields}&amp;buyableFields={buyableFields}</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_createupdate">Create and update products</a>
+        </td>
+        <td>POST /products</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_updateprice">Update products quantity and price</a>
+        </td>
+        <td>POST /products/quantityprice</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_updateproductsstatus">Update products status</a>
+        </td>
+        <td>POST /products/status</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Orders Endpoints</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="max-width: 20em; width: 20em;">Endpoint</th>
+        <th>URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_getorders">Get orders</a>
+        </td>
+        <td>GET /orders?status={status}&amp;limit={limit}</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_getorder">Get order</a>
+        </td>
+        <td>GET /orders/{id}</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_acknowledge">Acknowledge order</a>
+        </td>
+        <td>POST /orders/{id}/acknowledge</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a>
+        </td>
+        <td>POST /orders/{id}/ship</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_cancelorder">Cancel order</a>
+        </td>
+        <td>POST /orders/{id}/cancel</td>
+    </tr>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_refundorder">Refund order</a>
+        </td>
+        <td>POST /orders/{id}/refund</td>
+    </tr>
+    </tbody>
+</table>
+<h3>General Endpoints</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="max-width: 20em; width: 20em;">Endpoint</th>
+        <th>URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a class="link" href="#/ng_api/api_r_e_getpending">Get pending batch</a>
+        </td>
+        <td>GET /(any)</td>
+    </tr>
+    </tbody>
+
+</table>

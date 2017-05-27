@@ -1,0 +1,82 @@
+<h1>OrderItemCancellation API Model </h1>
+<blockquote>API model information</blockquote>
+<h3>Description</h3>
+<p>The cancellation or refund of an order line item on the marketplace</p>
+<!-- Properties -->
+<h3>Properties</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Required</th>
+        <th>Data Type</th>
+        <th>Description</th>
+        <th>Example Values</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>ID</td>
+        <td class="text-center bg-info">True</td>
+        <td>string</td>
+        <td>The unique identifier for this ordered line item</td>
+        <td>
+            <ul>
+                <li>123456</li>
+                <li>oB7cJ</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Quantity</td>
+        <td class="text-center bg-info">True</td>
+        <td>integer</td>
+        <td>The number of units to cancel or refund</td>
+        <td>
+            <ul>
+                <li>1</li>
+                <li>6</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Reason</td>
+        <td class="text-center bg-info">True</td>
+        <td><a class="link" href="#/ng_api/api_r_m_cancellationreason">CancellationReason</a></td>
+        <td>The reason the item is being canceled</td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>SellerSku</td>
+        <td class="text-center bg-info">True</td>
+        <td>string</td>
+        <td>The SKU of the ordered line item</td>
+        <td>
+            <ul>
+                <li>123456</li>
+                <li>H1% - L!?@</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- Allowed Values -->
+<!-- Example Model -->
+<h3>Example Model</h3>
+<p>Use the JSON code below as an example of how this model will be serialized.</p>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "Quantity": 5,</li>
+            <li> "Reason": "Other"</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

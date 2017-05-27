@@ -23,9 +23,16 @@ body {
 }
 
 .header .nav_bar {
-    width: 1200px;
+
     margin: 0 auto;
     overflow: hidden;
+}
+
+.header .logo{
+    position: relative;
+    margin-right: 70px;
+    float: left;
+
 }
 
 .header p {
@@ -45,11 +52,19 @@ a {
     text-decoration: none;
 }
 
+a.link{
+    color:#337ab7 ;
+}
+
+a.link:hover{
+    text-decoration: underline;
+}
+
 .header a:hover{
     color: #DBDBDB;
 }
 .header .nav {
-    margin-left:200px;
+    margin-left:224px;
     overflow: hidden;
 }
 
@@ -276,6 +291,12 @@ div p {
     margin-left: -10px;
 }
 
+/*Noya： 超长代码样式*/
+.artBox ol li{
+    list-style: decimal;!important;
+    white-space:pre;
+}
+
 .artBox ul {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -334,16 +355,15 @@ div p {
     border-top: 1px dotted #666;
 }
 
-/* sofia03-01 区块背景色等样式 */
+/* 区块背景色等样式 */
 
 .artBox blockquote {
     padding: 0 15px;
-    color: #777;
-    border-left: 4px solid #ddd;
+    color: #666;
+    border-left: 6px solid #ddd;
 }
 
-/* sofia03-01 代码区高亮显示 */
-
+/*代码区高亮显示 */
 .artBox code {
     padding: 0;
     padding: 0.3em 0.3em;
@@ -353,7 +373,6 @@ div p {
 }
 
 .artBox code.sec {
-    padding: 0;
     padding: 0.3em 0.3em;
     margin: 0;
     background-color: #aad7ff;
@@ -370,15 +389,27 @@ div p {
 }
 
 .artBox .codehilite {
-    padding: 2px;
-    /* Edited 20160303 vantis*/
-    overflow: auto;
+    padding: 2px 10px;
     font-size: 85%;
     line-height: 1.45;
     background-color: #f7f7f7;
     border-radius: 3px;
+
 }
 
+.artBox .codehilite_ol_long {
+    padding: 2px 28px;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    height:350px;
+    overflow: scroll;
+}
+
+.artBox .codehilite ul li{
+    list-style: none;
+}
 /* sofia03-01 表格相关的样式 */
 
 .artBox table {

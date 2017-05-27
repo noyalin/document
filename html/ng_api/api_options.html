@@ -1,0 +1,59 @@
+<!-- 文章开始 -->
+<h1>Options </h1>
+<blockquote>Options for configuring your Voyageone integration.</blockquote>
+<table>
+    <thead>
+    <tr>
+        <th align="left">Option</th>
+        <th align="left">Example</th>
+        <th align="left">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Base URL</td>
+        <td>https://example.com/api/</td>
+        <td>The root URL of your Access Voyageone API</td>
+    </tr>
+    <tr>
+        <td>Support Zero Quantity Products</td>
+        <td>True</td>
+        <td>
+            If true, sellers will be permitted to list products that are out of stock (meaning they do not have positive
+            available buyable quantity).<br>
+            If false, sellers will not be permitted to list out of stock products.
+        </td>
+    </tr>
+    <tr>
+        <td>Product Content Update Frequency</td>
+        <td>6 hours</td>
+        <td>How often Voyageone will attempt to update product data such as title and description.</td>
+    </tr>
+    <tr>
+        <td>Quantity and Price Update Frequency</td>
+        <td>15 minutes</td>
+        <td>How often Voyageone will attempt to update each seller’s quantity and price information.</td>
+    </tr>
+    <tr>
+        <td>Order Import Frequency</td>
+        <td>15 minutes</td>
+        <td>
+            How often Voyageone will attempt to import new seller orders, send shipments,
+            and issue refund and cancellation requests.
+        </td>
+    </tr>
+    <tr>
+        <td>API Rate Limits</td>
+        <td>1000 requests per minute per seller</td>
+        <td>Restricts how many requests can be made on a seller’s behalf to your API in minutes.</td>
+    </tr>
+    <tr>
+        <td>Update Batch Size Limits</td>
+        <td>
+            500 Products / batch<br>
+            200 Shipments/ batch
+        </td>
+        <td>Restricts the maximum number of elements per batch that Voyageone will send to your API</td>
+    </tr>
+    </tbody>
+</table>

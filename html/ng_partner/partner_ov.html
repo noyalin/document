@@ -1,0 +1,174 @@
+<!-- 文章开始 -->
+<h1>Initial Validation - Overview </h1>
+<blockquote>Details on the initial validation procedure</blockquote>
+<h4>Introduction</h4>
+<p>
+    Initial API validation is done by way of the online API validator tool:
+    a utility that runs a series of tests against your Access ChannelAdvisor
+    API and provides real-time feedback to partners about any endpoints that display behavior
+    or return responses that are not consistent with the API requirements as outlined in the
+    <a href="/ApiDocumentation/Reference/Endpoints">Endpoints</a>
+    section of this documentation. This allows your developers to verify basic API functionality,
+    ensure proper payload structure, and detect bugs in your API endpoints.
+</p>
+
+<h4>What the validator tool tests</h4>
+<p>
+    Validation is divided into two test suites-- one suite for orders endpoints, and one for products (see below).
+    Each suite contains a certain number of tests. Each suite can be run independently, allowing partners to develop
+    and test the orders and products endpoints concurrently. However, each test within a suite relies
+    on the data and successful outcome of the preceding test of that suite in order to run.
+    For this reason, the test suite terminates once the first validation failure is detected.
+</p>
+
+<h4>What the validator tool does <em>not</em> test</h4>
+<p>
+    Although the validator tool does verify some basic functionality of the API endpoints,
+    it is not comprehensive. For example, it does not attempt to test:
+</p>
+<ul>
+    <li>Pending status orders</li>
+    <li>Partial cancellations</li>
+    <li>Partial refunds</li>
+    <li>Partial shipments</li>
+</ul>
+<p></p>
+<p>
+    Additionally, the validator tool is currently configured only for standard Access API implementations.
+    If any of the following are true about your API, you may not be able to complete a successful validator run
+    of one or both test suites. If this is the case, please email your technical contact.
+</p>
+<ul>
+    <li>Cannot return async responses within a few minutes</li>
+    <li>Does not support cancellations</li>
+    <li>Does not support refunds</li>
+    <li>Does not support shipments</li>
+    <li>Requires products fields other than those defined on the as defined on the <a
+            href="/ApiDocumentation/Products/TemplateFields">Product Fields</a> page
+    </li>
+    <li>Has strict data requirements on product fields</li>
+</ul>
+<p></p>
+<p>
+    We are constantly working to make the API development process as easy as possible. In the future, we hope to
+    expand the validator to verify more endpoints and situations, as well as to add more configuration options to
+    handle channels with special Access API implementations as outlined above.
+</p>
+
+<h4>Validation test results</h4>
+<p>
+    At the end of each test suite run, the result of the test suite is displayed, indicating the status of each test.
+    If the test failed, there will also be a message indicating which aspect of the API failed to pass validation.
+    Logs of the validation steps and HTTP traffic are provided for each test. A link is also provided to
+    download a combined log of all tests.
+</p>
+<p>
+    If any validation run is unclear to you, or if you experience any problems with the API validator, please
+    email your technical contact with your question and the URL of the validation run.
+</p>
+
+<h4>Next steps</h4>
+<p>
+    After successful validation with this online validator tool, ChannelAdvisor
+    will begin the next phase of the partner launch cycle: integration verification. That will include
+    more in-depth validation of the API than is currently possible in this online validator tool.
+    It will also include the creation and testing of an synchronization task that will provide the
+    integrate between ChannelAdvisor's test environments and the Access API.
+</p>
+
+<h4>Example mode</h4>
+<p>
+    Running a test suite in "Example mode" instructs the validator to return what a successful run against
+    the API <span style="font-style: italic">should</span> look like. It does this by running a test suite
+    against a test API component implemented by ChannelAdvisor that passes all validation requirements.
+    Use this example validation feature as a model or "cheat sheet" when writing or debugging your Access API.
+</p>
+
+<h4>Products test suite</h4>
+<p>
+    The products test suite runs a series of tests against the products endpoints of the Access
+    API and provides real-time feedback to partners about any endpoints that display behavior
+    or return responses that are not consistent with the API requirements as outlined in the
+    <a href="/ApiDocumentation/Products/ApiEndpoints">Products API Endpoints</a> documentation.
+</p>
+<p>
+    The test suite contains the following tests:
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Add products</td>
+        <td>Creates a certain number of new products on the API</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Get all products</td>
+        <td>Gets all products from the API and validates their state</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Add update products</td>
+        <td>Creates and updates a certain number of products on the API</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Get all products</td>
+        <td>Gets all products from the API and validates their state</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Update price and quantity</td>
+        <td>Updates the price and quantity of certain items on the API</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Get all products</td>
+        <td>Gets all products from the API and validates their state</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Update listing status</td>
+        <td>Updates the listing status of certain items on the API</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Get all products</td>
+        <td>Gets all products from the API and validates their state</td>
+    </tr>
+
+    </tbody>
+
+</table>
+<p></p>
+
+<h4>Orders test suite</h4>
+<p>
+    The orders test suite runs a series of tests against the orders endpoints of the Access
+    API and provides real-time feedback to partners about any endpoints that display behavior
+    or return responses that are not consistent with the API requirements as outlined in the
+    <a href="/ApiDocumentation/Orders/ApiEndpoints">Orders API Endpoints</a> documentation.
+</p>
+<p>
+    The test suite contains the following tests:
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<p></p>

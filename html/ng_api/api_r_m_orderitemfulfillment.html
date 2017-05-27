@@ -1,0 +1,105 @@
+<h1>OrderItemFulfillment API Model </h1>
+<blockquote>API model information</blockquote>
+<h3>Description</h3>
+<p>The fulfillment of an order line item on the marketplace</p>
+<!-- Properties -->
+<h3>Properties</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Required</th>
+        <th>Data Type</th>
+        <th>Description</th>
+        <th>Example Values</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>OrderItemID</td>
+        <td class="text-center bg-info">True</td>
+        <td>string</td>
+        <td>A unique identifier for this ordered line item on your site.</td>
+        <td>
+            <ul>
+                <li>123456</li>
+                <li>oB7cJ</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Quantity</td>
+        <td class="text-center bg-info">True</td>
+        <td>integer</td>
+        <td>The number of units shipped</td>
+        <td>
+            <ul>
+                <li>1</li>
+                <li>6</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>SellerSku</td>
+        <td class="text-center bg-info">True</td>
+        <td>string</td>
+        <td>The SKU of the ordered line item that was shipped</td>
+        <td>
+            <ul>
+                <li>123456</li>
+                <li>H1% - L!?@</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ShippedDateUtc</td>
+        <td class="text-center bg-info">True</td>
+        <td>UTC date/time</td>
+        <td>The ISO 8601 UTC date/time on which the order was marked as shipped in ChannelAdvisor</td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>ShippingCarrier</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The carrier company of the shipment</td>
+        <td>
+            <ul>
+                <li>FedEx</li>
+                <li>USPS</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>ShippingClass</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The shipping class of the shipment</td>
+        <td>
+            <ul>
+                <li>Ground</li>
+                <li>Expedited</li>
+                <li>Freight</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>TrackingNumber</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The tracking number of the shipment</td>
+        <td>
+            <ul>
+                <li>9400115901458007184672</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>>

@@ -1,0 +1,145 @@
+<h1>ErrorID API Model </h1>
+<blockquote>API model information</blockquote>
+<h3>Description</h3>
+<p>Error classification</p>
+
+<h3>Allowed Values</h3>
+<p>
+    Both integer and string value representations are acceptable as responses for this model,
+    however, for readability purposes, only the string representation will be sent in requests
+    from Voyageone.
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Integer Value</th>
+        <th>String Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1000</td>
+        <td>Info</td>
+    </tr>
+    <tr>
+        <td>2000</td>
+        <td>Warning</td>
+    </tr>
+    <tr>
+        <td>3000</td>
+        <td>SystemFailure</td>
+    </tr>
+    <tr>
+        <td>3001</td>
+        <td>SystemUnavailable</td>
+    </tr>
+    <tr>
+        <td>3002</td>
+        <td>RateLimitExceeded</td>
+    </tr>
+    <tr>
+        <td>4000</td>
+        <td>AuthorizationFailure</td>
+    </tr>
+    <tr>
+        <td>4001</td>
+        <td>InvalidToken</td>
+    </tr>
+    <tr>
+        <td>4002</td>
+        <td>InvalidSellerID</td>
+    </tr>
+    <tr>
+        <td>5000</td>
+        <td>ProductNotFound</td>
+    </tr>
+    <tr>
+        <td>5001</td>
+        <td>ProductMissingRequiredFields</td>
+    </tr>
+    <tr>
+        <td>5002</td>
+        <td>ProductFailedDataValidation</td>
+    </tr>
+    <tr>
+        <td>5003</td>
+        <td>ProductFailedCreate</td>
+    </tr>
+    <tr>
+        <td>5004</td>
+        <td>ProductFailedUpdate</td>
+    </tr>
+    <tr>
+        <td>5100</td>
+        <td>ProductMissingCategory</td>
+    </tr>
+    <tr>
+        <td>5101</td>
+        <td>ProductInvalidCategory</td>
+    </tr>
+    <tr>
+        <td>5200</td>
+        <td>ProductPendingReview</td>
+    </tr>
+    <tr>
+        <td>6000</td>
+        <td>OrderNotFound</td>
+    </tr>
+    <tr>
+        <td>6001</td>
+        <td>InvalidOrder</td>
+    </tr>
+    <tr>
+        <td>6002</td>
+        <td>InvalidOrderStatus</td>
+    </tr>
+    <tr>
+        <td>6100</td>
+        <td>ShipmentFailed</td>
+    </tr>
+    <tr>
+        <td>6101</td>
+        <td>InvalidTrackingNumber</td>
+    </tr>
+    <tr>
+        <td>6102</td>
+        <td>InvalidShippingCarrier</td>
+    </tr>
+    <tr>
+        <td>6103</td>
+        <td>InvalidShippingClass</td>
+    </tr>
+    <tr>
+        <td>6200</td>
+        <td>RefundFailed</td>
+    </tr>
+    <tr>
+        <td>6201</td>
+        <td>UnsupportedRefundReason</td>
+    </tr>
+    <tr>
+        <td>6300</td>
+        <td>CancellationFailed</td>
+    </tr>
+    <tr>
+        <td>6301</td>
+        <td>UnsupportedCancellationReason</td>
+    </tr>
+    <tr>
+        <td>7000</td>
+        <td>InvalidRequest</td>
+    </tr>
+    <tr>
+        <td>7001</td>
+        <td>MissingRequiredParameter</td>
+    </tr>
+    <tr>
+        <td>7002</td>
+        <td>InvalidRequiredParameter</td>
+    </tr>
+    <tr>
+        <td>8000</td>
+        <td>BatchNotFound</td>
+    </tr>
+    </tbody>
+</table>

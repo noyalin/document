@@ -1,0 +1,299 @@
+<h1>Orders - Examples </h1>
+<blockquote>Examples of order responses</blockquote>
+<h3>Authentication Errors:</h3>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": null,</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "InvalidSellerID",</li>
+            <li> "ErrorCode": "067",</li>
+            <li> "Message": "Your seller ID is invalid. Please contact our support team to obtain a valid seller ID."
+            </li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "InvalidToken",</li>
+            <li> "ErrorCode": "943",</li>
+            <li> "Message": "Your seller token is invalid. Please contact our support team to obtain a valid
+                authentication token."
+            </li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Acknowledge order</h3>
+<h4>URL: https://{your.domain.com}/orders/{id}/acknowledge</h4>
+<h4>Method: POST</h4>
+<h5>Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Ship order</h3>
+<h4>URL: https://{your.domain.com}/orders/{id}/ship</h4>
+<h4>Method: POST</h4>
+<h5>Request:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ShippedDateUtc": "2016-02-28T22:45:42.647-05:00",</li>
+            <li> "TrackingNumber": "123456789",</li>
+            <li> "ShippingCarrier": "FedEx",</li>
+            <li> "ShippingClass": "Ground",</li>
+            <li> "Items": {</li>
+            <li> "TestSKU1": 3,</li>
+            <li> "TestSKU2": 2</li>
+            <li> }</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            </li>
+            <li> "ResponseBody": {},</li>
+            </li>
+            <li> "Status": "Complete",</li>
+            </li>
+            <li> "PendingUri": null,</li>
+            </li>
+            <li> "Errors": []</li>
+            </li>
+            <li>}</li>
+            </li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Error Response(Invalid Tracking Number):</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "InvalidTrackingNumber",</li>
+            <li> "ErrorCode": "487",</li>
+            <li> "Message": "The tracking number provided is invalid"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Error Response(Invalid Shipping Carrier):</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "InvalidShippingCarrier",</li>
+            <li> "ErrorCode": "951",</li>
+            <li> "Message": "The shipping carrier is invalid"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Request for one order shipped in multiple boxes:</h3>
+<h4>URL: https://{your.domain.com}/orders/fulfill</h4>
+<h4>Method: POST</h4>
+<h5>Request:</h5>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ID": "ORDERID1",</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "OrderItemID": "TestSKU1",</li>
+            <li> "SellerSku": "TestSKU1",</li>
+            <li> "Quantity": 2,</li>
+            <li> "ShippedDateUtc": "2016-03-04T21:26:14",</li>
+            <li> "TrackingNumber": "123456789",</li>
+            <li> "ShippingCarrier": "FedEx",</li>
+            <li> "ShippingClass": "Ground"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "OrderItemID": "TestSKU2",</li>
+            <li> "SellerSku": "TestSKU2",</li>
+            <li> "Quantity": 2,</li>
+            <li> "ShippedDateUtc": "2016-03-04T21:26:14",</li>
+            <li> "TrackingNumber": null,</li>
+            <li> "ShippingCarrier": "UPS",</li>
+            <li> "ShippingClass": "GROUND"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {</li>
+            <li> "ID": "ORDERID1",</li>
+            <li> "Result": "Success",</li>
+            <li> "Errors": []</li>
+            <li> },</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Cancel Order</h3>
+<h4>URL: https://{your.domain.com}/orders/{id}/cancel</h4>
+<h4>Method: POST</h4>
+<h5>Request:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "OrderID": "ORDERID1",</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "1234",</li>
+            <li> "SellerSku": "TestSKU1",</li>
+            <li> "Quantity": 1,</li>
+            <li> "Reason": "Other"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Error Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "CancellationFailed",</li>
+            <li> "ErrorCode": "346",</li>
+            <li> "Message": "The order has already been canceled and cannot be canceled again"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Refund Order</h3>
+<h4>URL: https://{your.domain.com}/orders/{id}/refund</h4>
+<h4>Method: POST</h4>
+<h5>Request:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "OrderID": "ORDERID1",</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": null,</li>
+            <li> "SellerSku": "TestSKU1",</li>
+            <li> "Quantity": 1,</li>
+            <li> "Reason": "CouldNotShip"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": null,</li>
+            <li> "SellerSku": "TestSKU2",</li>
+            <li> "Quantity": 2,</li>
+            <li> "Reason": "Other"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Error Response:</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "RefundFailed",</li>
+            <li> "ErrorCode": "347",</li>
+            <li> "Message": "Unable to map the cancellation/refund reason to one available on the marketplace, please
+                supply one of the following supported reasons: X, Y, Z"
+            </li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

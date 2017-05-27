@@ -1,0 +1,168 @@
+<h1>Errors - Overview</h1>
+<blockquote>Overview of how, when, and which types of error responses to return</blockquote>
+
+<p>
+    All errors, warnings, and other alerts should be communicated using <a class="link" href="#/ng_api/api_r_m_error">Error</a>
+    object. This object allows you to specify an ID from the allowed list of <a class="link"
+                                                                                href="#/ng_api/api_r_m_errorid">ErrorID</a>
+    values,
+    a code to match the error to an internal error identifier, and a message providing details on the error.
+    Since all error feedback is communicated in this manner, please return every API response with HTTP Status OK.
+</p>
+
+<h3>Error types</h3>
+<p>
+    ChannelAdvisor internally classifies all errors it receives into two types: system errors and customer errors. The
+    behavior of
+    the application, the communication to the seller, and the overall usability of the integration all depend on the
+    type
+    of error returned and how it is classified.
+</p>
+
+<h4>System errors</h4>
+<p>
+    System errors indicate that a problem has occurred in the partners API as a result of an outage, a bug, or other
+    system issue.
+    The exact details of system errors are not communicated to sellers; they will simply receive a generic error
+    message indicating that there is a communication issue that is being addressed. All
+    <a class="link" href="#/ng_api/api_r_m_errorid">ErrorID</a> values in the 3000, 7000, and 8000 ranges are treated as
+    system errors.
+</p>
+
+<h5>Example system error</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ID": "SystemUnavailable",</li>
+            <li> "ErrorCode": "897",</li>
+            <li> "Message": "The API is currently down for maintenance."</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h4>Customer errors</h4>
+<p>
+    Customer errors indicate that a problem that can be resolve through seller action (usually because he has
+    submitted invalid data). This is the primary mechanism for providing feedback to the seller, so customer
+    errors are generally related directly back to the seller seconds after they are received.
+    Therefore, all customer error messages should be clear, concise, and indicate what the seller needs to do in
+    order to resolve the issue; they should not contain stack traces, internal logging details, or obscure
+    debugging information. Currently, all <a class="link" href="#/ng_api/api_r_m_errorid">ErrorID</a> values that are
+    not classified as
+    system errors are classified as customer errors.
+</p>
+<h5>Example customer error</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ID": "ProductFailedDataValidation",</li>
+            <li> "ErrorCode": "126",</li>
+            <li> "Message": "HTML tags are not allowed in the product description field."</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Error placement</h3>
+<p>
+    The placement of an error within the response depends on the type of request that was issued and the type of
+    error that occurred.
+</p>
+
+<h4>Response-level errors</h4>
+<p>
+    When an error occurs that prevents the request as a whole from being processed by your API,
+    the ResponseStatus of the <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a> should be
+    3 / Failed, and all errors should be returned at the root
+    level of the response. Some example response-level errors may include 3001 / SystemUnavailable,
+    4002 / InvalidSellerID, 4001 / InvalidToken, etc.
+    Additionally, all errors returned from non-batch endpoints (meaning endpoints that are scoped to a single entity,
+    like the <a class="link" href="#/ng_api/api_r_e_getorder">Get order</a> endpoint and the
+    <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint)
+    will be response-level errors due to the fact that they are single, atomic operations.
+</p>
+<p>
+    As the <a class="link" href="#/ng_api/api_rf">Response Format</a>
+    page describes, if a response-level error is returned, the ResponseBody of the <a class="link"
+                                                                                      href="#/ng_api/api_r_m_actionresponse">ActionResponse</a>
+    may be null.
+</p>
+
+<h5>Example <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a> with a response-level error</h5>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": null,</li>
+            <li> "Status": "Failed",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "SystemUnavailable",</li>
+            <li> "ErrorCode": "897",</li>
+            <li> "Message": "The API is currently down for maintenance."</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h4>Element-level errors</h4>
+<p>
+    On the other hand, when processing a request that contains a batch of elements, an error may occur whose scope
+    is limited to a specific entity in the batch. In these cases, errors should be returned in the element's
+    response object for which it occurred. For example, if 10 <a class="link" href="#/ng_api/api_r_m_buyableproduct">BuyableProduct</a>
+    items out of a 100-product batch failed your system's item validation, you would return the errors on the
+    10 corresponding <a class="link" href="#/ng_api/api_r_m_buyableproductresult">BuyableProductResult</a> objects in
+    the response, but not
+    at the response level or on any of the other 90 products. The only time the <a class="link"
+                                                                                   href="#/ng_api/api_r_m_actionresponse">ActionResponse</a>
+    should contain a <a class="link" href="#/ng_api/api_r_m_responsestatus">ResponseStatus</a> of 3 / Failed
+    is when there are no elements in the response body because the entire request as a whole could not be processed.
+    If elements are returned, the <a class="link" href="#/ng_api/api_r_m_responsestatus">ResponseStatus</a>
+    should be 1 / Complete or 2 / CompleteWithErrors,
+    and contain errors at the element level.
+</p>
+
+<h5>Example <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a> with an element-level error</h5>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "MarketPlaceItemID": "REBEL X-WING",</li>
+            <li> "URL": "http://your-url.com/products/REBEL X-WING",</li>
+            <li> "Errors": null</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": null</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "SKU123",</li>
+            <li> "BuyableProductResults": [],</li>
+            <li> "Errors": [</li>
+            <li> {</li>
+            <li> "ID": "ProductFailedDataValidation",</li>
+            <li> "ErrorCode": "126",</li>
+            <li> "Message": "HTML tags are not allowed in the product description field."</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Status": "CompleteWithErrors",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

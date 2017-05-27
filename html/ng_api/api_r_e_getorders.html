@@ -1,0 +1,171 @@
+<h1>Get orders API Endpoint</h1>
+<blockquote>API endpoint information</blockquote>
+h3>URL: https://{your.domain.com}/orders?status={status}&amp;limit={limit}</h3>
+<h3>Method: GET</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>limit</td>
+        <td class="text-center ">False</td>
+        <td>The number of orders to return. Default is no limit</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td class="text-center ">False</td>
+        <td>The status of orders to return. If no status is specified, orders of any status are returned</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Asynchronous response support</h3>
+<p>Voyageone currently supports both synchronous and asynchronous responses from this endpoint.</p>
+<h3>Description</h3>
+<p>Returns a list of all orders matching the filter criteria</p>
+<h3>Request Format</h3>
+<p>This endpoint does not accept a request body.</p>
+<h3>Response Format</h3>
+<p>This endpoint returns a/n <a class="link" href="#/ng_api/api_r_m_order">Order</a> array as its response body (example
+    below):</p>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": [</li>
+            <li> {</li>
+            <li> "ID": "M123W",</li>
+            <li> "OrderStatus": "ReleasedForShipment",</li>
+            <li> "OrderDateUtc": "2017-05-27T05:14:44.4212802Z",</li>
+            <li> "BuyerAddress": {</li>
+            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
+            <li> "FirstName": "Watto",</li>
+            <li> "LastName": "Toydarian",</li>
+            <li> "AddressLine1": "321 Landing St.",</li>
+            <li> "City": "Mos Eisley",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "ME-123",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "Ste. 104",</li>
+            <li> "CompanyName": "Tosche Stations",</li>
+            <li> "DaytimePhone": "919-123-4567",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": "Jr."</li>
+            <li> },</li>
+            <li> "ShippingAddress": {</li>
+            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
+            <li> "FirstName": "Luke",</li>
+            <li> "LastName": "Skywalker",</li>
+            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
+            <li> "City": "Tuskan Territory",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "TT-456",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
+            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
+            <li> "DaytimePhone": "480-987-6543",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": null</li>
+            <li> },</li>
+            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
+            <li> "DeliverByDateUtc": "2017-05-29T05:44:44.4212802Z",</li>
+            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
+            </li>
+            <li> "TotalPrice": 513.25,</li>
+            <li> "TotalTaxPrice": 5.00,</li>
+            <li> "TotalShippingPrice": 5.00,</li>
+            <li> "TotalShippingTaxPrice": 0.75,</li>
+            <li> "TotalGiftOptionPrice": 1.00,</li>
+            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
+            <li> "OtherFees": 2.00,</li>
+            <li> "Currency": "USD",</li>
+            <li> "VatInclusive": false,</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "UnitPrice": 100.00,</li>
+            <li> "Quantity": 5</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M456W",</li>
+            <li> "OrderStatus": "ReleasedForShipment",</li>
+            <li> "OrderDateUtc": "2017-05-27T05:14:44.4302802Z",</li>
+            <li> "BuyerAddress": {</li>
+            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
+            <li> "FirstName": "Watto",</li>
+            <li> "LastName": "Toydarian",</li>
+            <li> "AddressLine1": "321 Landing St.",</li>
+            <li> "City": "Mos Eisley",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "ME-123",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "Ste. 104",</li>
+            <li> "CompanyName": "Tosche Stations",</li>
+            <li> "DaytimePhone": "919-123-4567",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": "Jr."</li>
+            <li> },</li>
+            <li> "ShippingAddress": {</li>
+            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
+            <li> "FirstName": "Luke",</li>
+            <li> "LastName": "Skywalker",</li>
+            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
+            <li> "City": "Tuskan Territory",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "TT-456",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
+            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
+            <li> "DaytimePhone": "480-987-6543",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": null</li>
+            <li> },</li>
+            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
+            <li> "DeliverByDateUtc": "2017-05-29T05:44:44.4302802Z",</li>
+            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
+            </li>
+            <li> "TotalPrice": 587.05,</li>
+            <li> "TotalTaxPrice": 5.00,</li>
+            <li> "TotalShippingPrice": 5.00,</li>
+            <li> "TotalShippingTaxPrice": 0.75,</li>
+            <li> "TotalGiftOptionPrice": 1.00,</li>
+            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
+            <li> "OtherFees": 2.00,</li>
+            <li> "Currency": "USD",</li>
+            <li> "VatInclusive": false,</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "M333W",</li>
+            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
+            <li> "UnitPrice": 11.56,</li>
+            <li> "Quantity": 1</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M222W",</li>
+            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
+            <li> "UnitPrice": 15.56,</li>
+            <li> "Quantity": 4</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "UnitPrice": 100.00,</li>
+            <li> "Quantity": 5</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

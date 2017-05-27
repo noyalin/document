@@ -1,0 +1,63 @@
+<!-- 文章开始 -->
+<h1>Authentication</h1>
+<blockquote>Describes the API authentication protocols.</blockquote>
+<h3>Seller identification</h3>
+<p>
+    When on-boarding new sellers, you (the integration partner) will provide each seller with a unique seller ID
+    and seller API token. The seller will then provide these identifiers in the Voyageone application when they
+    configure
+    their integration. Voyageone will include them in every request to your API in the form of the SellerID and
+    SellerToken
+    HTTP headers. You should use these header values to associate the request with a seller's account and to
+    authenticate the integration.
+</p>
+<p>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>HTTP Header</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>SellerID</td>
+        <td>A unique, seller-specific identifier assigned by your system.</td>
+    </tr>
+    <tr>
+        <td>SellerToken</td>
+        <td>A unique, seller-specific token assigned by your system.</td>
+    </tr>
+    </tbody>
+</table>
+<p></p>
+
+<p>In the case of authorization failure, the API response should return one of the following <a
+        href="#/ng_api/api_r_m_errorid" class="link">ErrorID</a> values:</p>
+<table class="">
+    <thead>
+    <tr>
+        <th>Error ID</th>
+        <th>Example Error Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>4002 (InvalidSellerID)</td>
+        <td>Authorization failed. Invalid SellerID</td>
+    </tr>
+    <tr>
+        <td>4001 (InvalidToken)</td>
+        <td>Authorization failed. Invalid SellerToken</td>
+    </tr>
+    </tbody>
+</table>
+<p></p>
+
+<h4>Security Protocol</h4>
+<p>
+    All connections from the Voyageone production environment must be made using HTTPS to provide transport layer
+    security.
+    It is strongly recommended that you also enable HTTPS transport for any testing or sandbox API as well.
+</p>

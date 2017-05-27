@@ -10,24 +10,25 @@
 </head>
 <body>
 <div style="width: 100%;height: 90px;">
-    <iframe src="iframe/head.html"  class="iframeHead" frameborder="0" scrolling="no"></iframe>
+    <iframe src="iframe/head.html" class="iframeHead" frameborder="0" scrolling="no"></iframe>
 </div>
 <div class="voyaMain">
     <div class="voyaLeft ms-fl menuBox">
-        <a class="index" href="" target="_blank" title="API"><h2>API Documentation</h2></a>
+        <a class="index" href="" title="API"><h2>API Documentation</h2></a>
         <ul class="menu menu-1">
             <li>
-                <a class="open" >Technical Requirements</a>
+                <a class="open">Technical Requirements</a>
                 <ul class="menu menu-2">
                     <li>
                         <a class="open" href="#/ng_api/api_general">General</a>
-                        <a class="open" href="#/ng_api/api_re" target="_blank">Requirements</a>
-                        <a class="open" href="" target="_blank">Options</a>
-                        <a class="open" href="" target="_blank">Authentication</a>
-                        <a class="open" href="" target="_blank">Response Format</a>
-                        <a class="open" href="" target="_blank">Rate Limiting</a>
-                        <a class="open" href="" target="_blank">Batches</a>
-                        <a class="open" href="" target="_blank">Synchronous and <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Asynchronous Response<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support</a>
+                        <a class="open" href="#/ng_api/api_re">Requirements</a>
+                        <a class="open" href="#/ng_api/api_options">Options</a>
+                        <a class="open" href="#/ng_api/api_au">Authentication</a>
+                        <a class="open" href="#/ng_api/api_rf">Response Format</a>
+                        <a class="open" href="#/ng_api/api_rl">Rate Limiting</a>
+                        <a class="open" href="#/ng_api/api_batches">Batches</a>
+                        <a class="open" href="#/ng_api/api_sars">Synchronous and <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Asynchronous Response<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Support</a>
 
                     </li>
                 </ul>
@@ -36,11 +37,11 @@
                 <a class="open menu-now">Products</a>
                 <ul class="menu menu-2">
                     <li>
-                        <a class="open" href="" target="_blank">Overview</a>
-                        <a class="open" href="" target="_blank">Communication Flow</a>
-                        <a class="open" href="" target="_blank">API Endpoints</a>
-                        <a class="open" href="" target="_blank">Fields</a>
-                        <a class="open" href="" target="_blank">Examples</a>
+                        <a class="open" href="#/ng_api/api_overview">Overview</a>
+                        <a class="open" href="#/ng_api/api_cf">Communication Flow</a>
+                        <a class="open" href="#/ng_api/api_ae">API Endpoints</a>
+                        <a class="open" href="#/ng_api/api_fields">Fields</a>
+                        <a class="open" href="#/ng_api/api_examples">Examples</a>
                     </li>
                 </ul>
             </li>
@@ -48,10 +49,10 @@
                 <a class="open menu-now">Orders</a>
                 <ul class="menu menu-2">
                     <li>
-                        <a class="open" href="" target="_blank">Overview</a>
-                        <a class="open" href="" target="_blank">Communication Flow</a>
-                        <a class="open" href="" target="_blank">API Endpoints</a>
-                        <a class="open" href="" target="_blank">Examples</a>
+                        <a class="open" href="#/ng_api/api_o_overview">Overview</a>
+                        <a class="open" href="#/ng_api/api_o_cf">Communication Flow</a>
+                        <a class="open" href="#/ng_api/api_o_ae">API Endpoints</a>
+                        <a class="open" href="#/ng_api/api_o_examples">Examples</a>
                     </li>
                 </ul>
             </li>
@@ -59,8 +60,8 @@
                 <a class="open menu-now">Errors</a>
                 <ul class="menu menu-2">
                     <li>
-                        <a class="open" href="" target="_blank">Overview</a>
-                        <a class="open" href="" target="_blank">Examples</a>
+                        <a class="open" href="#/ng_api/api_e_overview">Overview</a>
+                        <a class="open" href="#/ng_api/api_e_examples">Examples</a>
                     </li>
                 </ul>
             </li>
@@ -68,8 +69,8 @@
                 <a class="open menu-now">Reference</a>
                 <ul class="menu menu-2">
                     <li>
-                        <a class="open" href="" target="_blank">Endpoints</a>
-                        <a class="open" href="" target="_blank">Models</a>
+                        <a class="open" href="#/ng_api/api_r_en">Endpoints</a>
+                        <a class="open" href="#/ng_api/api_r_models">Models</a>
                     </li>
                 </ul>
             </li>
@@ -83,26 +84,398 @@
 </div>
 <script type="text/javascript">
     angular.module('ngRouteExample', ['ngRoute'])
-            .controller('api_general_ctrl', function ($scope, $route) {
-                $scope.$route = $route;
-            })
-            .controller('api_re_ctrl', function ($scope, $route) {
-                $scope.$route = $route;
-            })
-            .config(function ($routeProvider) {
-                $routeProvider
-                        .when('/ng_api/api_general', {
-                            templateUrl: 'ng_api/api_general.html',
-                            controller: 'api_general_ctrl'
-                        })
-                        .when('/ng_api/api_re', {
-                            templateUrl: 'ng_api/api_re.html',
-                            controller: 'api_gre_ctrl'
-                        })
-                        .otherwise({
-                            redirectTo: '/ng_api/api_general'
-                        });
-            });
+        .controller('api_general_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_re_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_options_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_au_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_rl_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_batches_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_sars_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_overview_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_cf_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_ae_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_fields_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_examples_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_o_overview_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_o_cf_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_o_ae_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_o_examples_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_e_overview_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_e_examples_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_en_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_models_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_orderitem_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_errorid_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_actionresponse_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_buyableproduct_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_buyableproductresult_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_cancellationreason_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_emptyobject_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_error_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_field_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_listingstatus_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_order_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_orderaddress_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_ordercancellation_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_orderfulfillment_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_orderfulfillmentresult_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_OrderItemCancellation_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_orderitemfulfillment_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_ordestatus_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_productgroup_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_productgroupresult_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_requestresult_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_responsestatus_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_m_shiprequest_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_gp_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_createupdate_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_updateprice_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_updateproductsstatus_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_getorders_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_getorder_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_acknowledge_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_shiporder_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_cancelorder_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_refundorder_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .controller('api_r_e_getpending_ctrl', function ($scope, $route) {
+            $scope.$route = $route;
+        })
+        .config(function ($routeProvider) {
+            $routeProvider
+                .when('/ng_api/api_general', {
+                    templateUrl: 'ng_api/api_general.html',
+                    controller: 'api_general_ctrl'
+                })
+                .when('/ng_api/api_re', {
+                    templateUrl: 'ng_api/api_re.html',
+                    controller: 'api_gre_ctrl'
+                })
+                .when('/ng_api/api_options', {
+                    templateUrl: 'ng_api/api_options.html',
+                    controller: 'api_options_ctrl'
+                })
+                .when('/ng_api/api_au', {
+                    templateUrl: 'ng_api/api_au.html',
+                    controller: 'api_au_ctrl'
+                })
+                .when('/ng_api/api_rf', {
+                    templateUrl: 'ng_api/api_rf.html',
+                    controller: 'api_rf_ctrl'
+                })
+                .when('/ng_api/api_rl', {
+                    templateUrl: 'ng_api/api_rl.html',
+                    controller: 'api_rl_ctrl'
+                })
+                .when('/ng_api/api_batches', {
+                    templateUrl: 'ng_api/api_batches.html',
+                    controller: 'api_batches_ctrl'
+                })
+                .when('/ng_api/api_sars', {
+                    templateUrl: 'ng_api/api_sars.html',
+                    controller: 'api_sars_ctrl'
+                })
+                .when('/ng_api/api_overview', {
+                    templateUrl: 'ng_api/api_overview.html',
+                    controller: 'api_overwrite_ctrl'
+                })
+                .when('/ng_api/api_overview', {
+                    templateUrl: 'ng_api/api_overview.html',
+                    controller: 'api_overview_ctrl'
+                })
+                .when('/ng_api/api_cf', {
+                    templateUrl: 'ng_api/api_cf.html',
+                    controller: 'api_cf_ctrl'
+                })
+                .when('/ng_api/api_ae', {
+                    templateUrl: 'ng_api/api_ae.html',
+                    controller: 'api_ae_ctrl'
+                })
+                .when('/ng_api/api_fields', {
+                    templateUrl: 'ng_api/api_fields.html',
+                    controller: 'api_fields_ctrl'
+                })
+                .when('/ng_api/api_examples', {
+                    templateUrl: 'ng_api/api_examples.html',
+                    controller: 'api_examples_ctrl'
+                })
+                .when('/ng_api/api_o_overview', {
+                    templateUrl: 'ng_api/api_o_overview.html',
+                    controller: 'api_o_overview_ctrl'
+                })
+                .when('/ng_api/api_o_cf', {
+                    templateUrl: 'ng_api/api_o_cf.html',
+                    controller: 'api_o_cf_ctrl'
+                })
+                .when('/ng_api/api_o_ae', {
+                    templateUrl: 'ng_api/api_o_ae.html',
+                    controller: 'api_o_ae_ctrl'
+                })
+                .when('/ng_api/api_o_examples', {
+                    templateUrl: 'ng_api/api_o_examples.html',
+                    controller: 'api_o_examples_ctrl'
+                })
+                .when('/ng_api/api_e_overview', {
+                    templateUrl: 'ng_api/api_e_overview.html',
+                    controller: 'api_e_overview_ctrl'
+                })
+                .when('/ng_api/api_e_examples', {
+                    templateUrl: 'ng_api/api_e_examples.html',
+                    controller: 'api_e_examples_ctrl'
+                })
+                .when('/ng_api/api_r_en', {
+                    templateUrl: 'ng_api/api_r_en.html',
+                    controller: 'api_r_en_ctrl'
+                })
+                .when('/ng_api/api_r_models', {
+                    templateUrl: 'ng_api/api_r_models.html',
+                    controller: 'api_r_models_ctrl'
+                })
+                .when('/ng_api/api_r_m_actionresponse', {
+                    templateUrl: 'ng_api/api_r_m_actionresponse.html',
+                    controller: 'api_r_m_actionresponse_ctrl'
+                })
+                .when('/ng_api/api_r_m_buyableproduct', {
+                    templateUrl: 'ng_api/api_r_m_buyableproduct.html',
+                    controller: 'api_r_m_buyableproduct_ctrl'
+                })
+                .when('/ng_api/api_r_m_buyableproductresult', {
+                    templateUrl: 'ng_api/api_r_m_buyableproductresult.html',
+                    controller: 'api_r_m_buyableproductresult_ctrl'
+                })
+                .when('/ng_api/api_r_m_cancellationreason', {
+                    templateUrl: 'ng_api/api_r_m_cancellationreason.html',
+                    controller: 'api_r_m_cancellationreason_ctrl'
+                })
+                .when('/ng_api/api_r_m_emptyobject', {
+                    templateUrl: 'ng_api/api_r_m_emptyobject.html',
+                    controller: 'api_r_m_emptyobject_ctrl'
+                })
+                .when('/ng_api/api_r_m_error', {
+                    templateUrl: 'ng_api/api_r_m_error.html',
+                    controller: 'api_r_m_error_ctrl'
+                })
+                .when('/ng_api/api_r_m_errorid', {
+                    templateUrl: 'ng_api/api_r_m_errorid.html',
+                    controller: 'api_r_m_errorid_ctrl'
+                })
+                .when('/ng_api/api_r_m_orderitem', {
+                    templateUrl: 'ng_api/api_r_m_orderitem.html',
+                    controller: 'api_r_m_orderitem_ctrl'
+                })
+                .when('/ng_api/api_r_m_field', {
+                    templateUrl: 'ng_api/api_r_m_field.html',
+                    controller: 'api_r_m_field_ctrl'
+                })
+                .when('/ng_api/api_r_m_listingstatus', {
+                    templateUrl: 'ng_api/api_r_m_listingstatus.html',
+                    controller: 'api_r_m_listingstatus_ctrl'
+                })
+                .when('/ng_api/api_r_m_order', {
+                    templateUrl: 'ng_api/api_r_m_order.html',
+                    controller: 'api_r_m_order_ctrl'
+                })
+                .when('/ng_api/api_r_m_orderaddress', {
+                    templateUrl: 'ng_api/api_r_m_orderaddress.html',
+                    controller: 'api_r_m_orderaddress_ctrl'
+                })
+                .when('/ng_api/api_r_m_ordercancellation', {
+                    templateUrl: 'ng_api/api_r_m_ordercancellation.html',
+                    controller: 'api_r_m_ordercancellation_ctrl'
+                })
+                .when('/ng_api/api_r_m_orderfulfillment', {
+                    templateUrl: 'ng_api/api_r_m_orderfulfillment.html',
+                    controller: 'api_r_m_orderfulfillment_ctrl'
+                })
+                .when('/ng_api/api_r_m_orderfulfillmentresult', {
+                    templateUrl: 'ng_api/api_r_m_orderfulfillmentresult.html',
+                    controller: 'api_r_m_orderfulfillmentresult_ctrl'
+                })
+                .when('/ng_api/api_r_m_OrderItemCancellation', {
+                    templateUrl: 'ng_api/api_r_m_OrderItemCancellation.html',
+                    controller: 'api_r_m_OrderItemCancellation_ctrl'
+                })
+                .when('/ng_api/api_r_m_orderitemfulfillment', {
+                    templateUrl: 'ng_api/api_r_m_orderitemfulfillment.html',
+                    controller: 'api_r_m_orderitemfulfillment_ctrl'
+                })
+                .when('/ng_api/api_r_m_ordestatus', {
+                    templateUrl: 'ng_api/api_r_m_ordestatus.html',
+                    controller: 'api_r_m_ordestatus_ctrl'
+                })
+                .when('/ng_api/api_r_m_productgroup', {
+                    templateUrl: 'ng_api/api_r_m_productgroup.html',
+                    controller: 'api_r_m_productgroup_ctrl'
+                })
+                .when('/ng_api/api_r_m_productgroupresult', {
+                    templateUrl: 'ng_api/api_r_m_productgroupresult.html',
+                    controller: 'api_r_m_productgroupresult_ctrl'
+                })
+                .when('/ng_api/api_r_m_requestresult', {
+                    templateUrl: 'ng_api/api_r_m_requestresult.html',
+                    controller: 'api_r_m_requestresult_ctrl'
+                })
+                .when('/ng_api/api_r_m_responsestatus', {
+                    templateUrl: 'ng_api/api_r_m_responsestatus.html',
+                    controller: 'api_r_m_responsestatus_ctrl'
+                })
+                .when('/ng_api/api_r_m_shiprequest', {
+                    templateUrl: 'ng_api/api_r_m_shiprequest.html',
+                    controller: 'api_r_m_shiprequest_ctrl'
+                })
+                .when('/ng_api/api_r_e_gp', {
+                    templateUrl: 'ng_api/api_r_e_gp.html',
+                    controller: 'api_r_e_gp_ctrl'
+                })
+                .when('/ng_api/api_r_e_createupdate', {
+                    templateUrl: 'ng_api/api_r_e_createupdate.html',
+                    controller: 'api_r_e_createupdate_ctrl'
+                })
+                .when('/ng_api/api_r_e_updateprice', {
+                    templateUrl: 'ng_api/api_r_e_updateprice.html',
+                    controller: 'api_r_e_updateprice_ctrl'
+                })
+                .when('/ng_api/api_r_e_updateproductsstatus', {
+                    templateUrl: 'ng_api/api_r_e_updateproductsstatus.html',
+                    controller: 'api_r_e_updateproductsstatus_ctrl'
+                })
+                .when('/ng_api/api_r_e_getorders', {
+                    templateUrl: 'ng_api/api_r_e_getorders.html',
+                    controller: 'api_r_e_getorders_ctrl'
+                })
+                .when('/ng_api/api_r_e_getorder', {
+                    templateUrl: 'ng_api/api_r_e_getorder.html',
+                    controller: 'api_r_e_getorder_ctrl'
+                })
+                .when('/ng_api/api_r_e_acknowledge', {
+                    templateUrl: 'ng_api/api_r_e_acknowledge.html',
+                    controller: 'api_r_e_acknowledge_ctrl'
+                })
+                .when('/ng_api/api_r_e_shiporder', {
+                    templateUrl: 'ng_api/api_r_e_shiporder.html',
+                    controller: 'api_r_e_shiporder_ctrl'
+                })
+                .when('/ng_api/api_r_e_cancelorder', {
+                    templateUrl: 'ng_api/api_r_e_cancelorder.html',
+                    controller: 'api_r_e_cancelorder_ctrl'
+                })
+                .when('/ng_api/api_r_e_refundorder', {
+                    templateUrl: 'ng_api/api_r_e_refundorder.html',
+                    controller: 'api_r_e_refundorder_ctrl'
+                })
+                .when('/ng_api/api_r_e_getpending', {
+                    templateUrl: 'ng_api/api_r_e_getpending.html',
+                    controller: 'api_r_e_getpending_ctrl'
+                })
+                .otherwise({
+                    redirectTo: '/ng_api/api_general'
+                });
+        });
 </script>
 </body>
 

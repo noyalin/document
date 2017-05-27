@@ -1,0 +1,207 @@
+<h1>OrderAddress API Model </h1>
+<blockquote>API model information</blockquote>
+<h3>Description</h3>
+<p>The address of an order on the marketplace</p>
+<!-- Properties -->
+<h3>Properties</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Required</th>
+        <th>Data Type</th>
+        <th>Description</th>
+        <th>Example Values</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>AddressLine1</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The first line of the address</td>
+        <td>
+            <ul>
+                <li>123 Main St.</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>AddressLine2</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The second line of the address</td>
+        <td>
+            <ul>
+                <li>Apt. #137</li>
+                <li>C/O Addison Phelps</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The city of the address</td>
+        <td>
+            <ul>
+                <li>Seattle</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>CompanyName</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The company name of the address</td>
+        <td>
+            <ul>
+                <li>Microsoft</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Country</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The ISO 3166-1 alpha-2 country code of the address</td>
+        <td>
+            <ul>
+                <li>US</li>
+                <li>DE</li>
+                <li>MX</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>DaytimePhone</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The daytime phone number of the address</td>
+        <td>
+            <ul>
+                <li>919-123-4567</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>EmailAddress</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The email of the person associated with this address</td>
+        <td>
+            <ul>
+                <li>jsmith@example.com</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>EveningPhone</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The evening phone number of the address</td>
+        <td>
+            <ul>
+                <li>919-123-4568</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>FirstName</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The first name of the person associated with this address</td>
+        <td>
+            <ul>
+                <li>John</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>LastName</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The last name of the person associated with this address</td>
+        <td>
+            <ul>
+                <li>Smith</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>NameSuffix</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The suffix of the person associated with this address</td>
+        <td>
+            <ul>
+                <li>Jr.</li>
+                <li>Sr.</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>PostalCode</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The postal code of the address</td>
+        <td>
+            <ul>
+                <li>27560</li>
+                <li>85204-12345</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>StateOrProvince</td>
+        <td class="text-center ">False</td>
+        <td>string</td>
+        <td>The ISO 3166-2 state/province code of the address</td>
+        <td>
+            <ul>
+                <li>NC</li>
+                <li>AK</li>
+                <li>DC</li>
+                <li>(etc.)</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- Allowed Values -->
+<!-- Example Model -->
+<h3>Example Model</h3>
+<p>Use the JSON code below as an example of how this model will be serialized.</p>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
+            <li> "FirstName": "Watto",</li>
+            <li> "LastName": "Toydarian",</li>
+            <li> "AddressLine1": "321 Landing St.",</li>
+            <li> "City": "Mos Eisley",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "ME-123",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "Ste. 104",</li>
+            <li> "CompanyName": "Tosche Stations",</li>
+            <li> "DaytimePhone": "919-123-4567",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": "Jr."</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

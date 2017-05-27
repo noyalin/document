@@ -1,0 +1,153 @@
+<h1>ProductGroup API Model </h1>
+<blockquote>API model information</blockquote>
+<h3>Description</h3>
+<p>An grouping of one of more items for purchase on the marketplace</p>
+<!-- Properties -->
+<h3>Properties</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Property</th>
+        <th>Required</th>
+        <th>Data Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>BuyableProducts</td>
+        <td class="text-center bg-info">True</td>
+        <td><a class="link" href="#/ng_api/api_r_m_buyableproduct">BuyableProduct</a> array</td>
+        <td>A list of buyable products</td>
+    </tr>
+    <tr>
+        <td>SellerSKU</td>
+        <td class="text-center bg-info">True</td>
+        <td>string</td>
+        <td>A unique seller SKU for the product</td>
+    </tr>
+    <tr>
+        <td>Fields</td>
+        <td class="text-center ">False</td>
+        <td><a class="link" href="#/ng_api/api_r_m_field">Field</a> array</td>
+        <td>Fields related to the product group</td>
+    </tr>
+    </tbody>
+</table>
+<!-- Allowed Values -->
+<!-- Example Model -->
+<h3>Example Model</h3>
+<p>Use the JSON code below as an example of how this model will be serialized.</p>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "SellerSKU": "LIGHTSABER",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "title",</li>
+            <li> "Value": "Lightsaber"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "description",</li>
+            <li> "Value": "This is the weapon of a Jedi Knight. Not as clumsy or random as a blaster; an elegant weapon
+                for a more civilized age."
+            </li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "category",</li>
+            <li> "Value": "Civilized Weapons"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "brand",</li>
+            <li> "Value": "Jedi Knights"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "productgroupimageurl1",</li>
+            <li> "Value":
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Dueling_lightsabers.svg/2000px-Dueling_lightsabers.svg.png"
+            </li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "Quantity": 14,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "14.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "red"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "medium"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "Quantity": 9,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "15.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "red"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "large"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "Quantity": 17,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "11.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "blue"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "medium"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "Quantity": 15,</li>
+            <li> "ListingStatus": "Live",</li>
+            <li> "Fields": [</li>
+            <li> {</li>
+            <li> "Name": "price",</li>
+            <li> "Value": "12.56"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "color",</li>
+            <li> "Value": "blue"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "Name": "size",</li>
+            <li> "Value": "large"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

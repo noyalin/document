@@ -1,0 +1,374 @@
+<h1>Orders - Overview</h1>
+<blockquote>An overview of how the order API endpoints should be implemented</blockquote>
+<h3>Order Status Values</h3>
+<p>
+    This is an explanation of the purpose and meaning of the various ChannelAdvisor-defined
+    <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> values, and how orders will progress from one
+    status to
+    another over their lifetime.
+</p>
+
+<!-- Order status table -->
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="min-width: 15em;">Order Status</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1 / Pending</td>
+        <td>
+            <p>
+                The Pending status indicates that the order has been created on the site, but it is not yet
+                ready for seller fulfillment at this time. There are many reasons you may wish to represent
+                an order in this status. Perhaps the payment has not yet been processed, or perhaps the order
+                is being processed through your site's buyer fraud/risk assessment. If there is any reason the
+                order should not be sent on to the seller to fulfill, the order should maintain the Pending status.
+                ChannelAdvisor will skip over orders that are in the pending state when downloading new orders to
+                bring to the seller for fulfillment. If your site does no support the concept of pending orders,
+                you may return an empty list from the <a class="link" href="#/ng_api/api_r_e_getorders">Get orders</a>
+                endpoint when the <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> passed to you is 1
+                / Pending
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>2 / ReleasedForShipment</td>
+        <td>
+            <p>
+                Once any roadblocks have been cleared that were causing the order to be held in 1 / Pending
+                status (if any), the order should be returned with an <a class="link"
+                                                                         href="#/ng_api/api_r_m_ordestatus">OrderStatus</a>
+                of
+                2 / ReleasedForShipment. This indicates that the order has met all the site's
+                requirements and is now ready for the seller to fulfill. ChannelAdvisor will query for orders in this
+                state
+                very frequently (about once every 15 minutes or so) and import the data of all orders in this state to
+                our system
+                for the seller to view and fulfill. If the order's math adds up and the order passes validation, it will
+                then be ingested
+                into our system. Please refer to the validation and math rules below.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>3 / AcknowledgedBySeller</td>
+        <td>
+            <p>
+                Once ChannelAdvisor imports a 2 / ReleasedForShipment order into our system, we will
+                immediately issue a call to your <a class="link" href="#/ng_api/api_r_e_acknowledge">Acknowledge
+                order</a> endpoint
+                to inform you that the order has been successfully imported. At this point, your API should set the
+                order's state to
+                3 / AcknowledgedBySeller. This indicates that the order has been received by the seller
+                and is awaiting the seller's fulfillment.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>4 / PartiallyShipped<br>5 / Shipped</td>
+        <td>
+            <p>
+                If the seller chooses to fulfill the order, he will generally do the following in order:
+            </p>
+            <ul>
+                <li>Package up the order</li>
+                <li>Give the order to the carrier for delivery to the buyer</li>
+                <li>Mark the order as shipped in ChannelAdvisor (carrier and tracking information may or may not be
+                    supplied).
+                </li>
+            </ul>
+            <p></p>
+            <p>
+                Once the seller has provided us the shipping information, we will send it to your API by posting to the
+                <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint. Once you receive this
+                information,
+                your system should perform any crucial validation on the request, and then immediately set the
+                order's state to 4 / PartiallyShipped or 5 / Shipped,
+                depending on the shipping information we sent you. We may send shipment data multiple times as the
+                seller ships more items,
+                corrects tracking information, etc. It will be up to you to apply any deltas and update the correct
+                shipping status accordingly.
+            </p>
+            <p>
+                <span style="font-weight: bold;">NOTE</span><br>
+                A request to the <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint is a bit
+                different
+                from other endpoints. Usually, a POST request signifies that ChannelAdvisor is asking your system to do
+                something on behalf of
+                the seller (like list a product, pull down a product, refund an order, etc). However, in the case of
+                fulfillment, we are simply
+                notifying you that a shipment has already taken place. If your system cannot successfully process that
+                information, you can return
+                an error. For example, if the seller did not provide what your system deems to be a valid tracking
+                number, you could return the
+                <a class="link" href="#/ng_api/api_r_m_errorid">ErrorID</a> 6101 / InvalidTrackingNumber. We would then
+                let the seller know that
+                sending shipping information to your site failed for the reason you specified. He may then choose to
+                correct his data and try again,
+                or he may not. Either way, the item is usually already on its way to the buyer.
+            </p>
+            <p>
+                For that reason, we currently expect that the <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a>
+                of the order should change to
+                4 / PartiallyShipped or 5 / Shipped as an immediate result of the
+                call to the <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint. Any site
+                fulfillment logic must either:
+            </p>
+            <ul>
+                <li>
+                    Execute and return success or failure as part of the response from the
+                    <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint, or
+                </li>
+                <li>
+                    Be processed after the endpoint has already returned its result. If this is the case, the back-end
+                    processing should by handled
+                    separate and apart from the API logic, meaning that any success or failure on the part of this site
+                    logic should not
+                    affect the order's <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a>.
+                </li>
+            </ul>
+            <p></p>
+            <p>
+                Either way, at the end of the call to the <a class="link" href="#/ng_api/api_r_e_shiporder">Ship
+                order</a> endpoint,
+                the response should either have succeeded and the <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a>
+                should now be either
+                4 / PartiallyShipped or 5 / Shipped, or else the response should have an
+                error and the <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> should remain as it was
+                prior to the call.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>6 / Canceled</td>
+        <td>
+            <p>
+                If the seller chooses not to fulfill an order, he will mark the order as canceled in the ChannelAdvisor
+                application.
+                Within a few minutes after he does this, we will issue a call to your
+                <a class="link" href="#/ng_api/api_r_e_cancelorder">Cancel order</a> endpoint
+                to indicate that the seller has decided not to fulfill the order. Your system should then set the
+                order's <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> to 6 / Canceled.
+                If the item has already been fully or partially shipped, we will instead call the
+                <a class="link" href="#/ng_api/api_r_e_refundorder">Refund order</a> endpoint
+                to make the request. The expected behavior of both endpoints is the same.
+            </p>
+            <p>
+                Because the math that sites use to calculate refunds/cancellation amounts varies greatly between
+                ChannelAdvisor's partners, a refund amount property is not provided to you in the
+                <a class="link" href="#/ng_api/api_r_e_cancelorder">Cancel order</a> and
+                <a class="link" href="#/ng_api/api_r_e_refundorder">Refund order</a> endpoint payloads.
+                You will be supplied with the SKU and the quantity to be refunded/canceled. It is up to your
+                system to calculate how much that refund entails and issue the transaction for that amount.
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Order math and validation -->
+<h3>Order math and validation</h3>
+<p>
+    Before an order can by imported into ChannelAdvisor, it will be validated to ensure that all numeric
+    values on the order add up correctly, and that all required properties have valid values. You may refer to
+    the <a class="link" href="#/ng_api/api_r_m_order">Order</a> model page for the list of required properties. If a
+    field is required,
+    you must supply a value-- null is not acceptable. Here are the rules around how order totals should add up:
+</p>
+<p>
+    The order total must be equal to (the sum of the items' (quantity * unit price value)) + (all other price fields).
+    If the order is marked as being VAT-inclusive order, the tax fields are not factored into the order total directly.
+</p>
+
+<h5>Example non-VAT order</h5>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ID": "M456W",</li>
+            <li> "OrderStatus": "ReleasedForShipment",</li>
+            <li> "OrderDateUtc": "2017-05-26T05:06:26.4912802Z",</li>
+            <li> "BuyerAddress": {</li>
+            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
+            <li> "FirstName": "Watto",</li>
+            <li> "LastName": "Toydarian",</li>
+            <li> "AddressLine1": "321 Landing St.",</li>
+            <li> "City": "Mos Eisley",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "ME-123",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "Ste. 104",</li>
+            <li> "CompanyName": "Tosche Stations",</li>
+            <li> "DaytimePhone": "919-123-4567",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": "Jr."</li>
+            <li> },</li>
+            <li> "ShippingAddress": {</li>
+            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
+            <li> "FirstName": "Luke",</li>
+            <li> "LastName": "Skywalker",</li>
+            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
+            <li> "City": "Tuskan Territory",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "TT-456",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
+            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
+            <li> "DaytimePhone": "480-987-6543",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": null</li>
+            <li> },</li>
+            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
+            <li> "DeliverByDateUtc": "2017-05-28T05:36:26.4912802Z",</li>
+            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
+            </li>
+            <li> "TotalPrice": 587.05,</li>
+            <li> "TotalTaxPrice": 5.00,</li>
+            <li> "TotalShippingPrice": 5.00,</li>
+            <li> "TotalShippingTaxPrice": 0.75,</li>
+            <li> "TotalGiftOptionPrice": 1.00,</li>
+            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
+            <li> "OtherFees": 2.00,</li>
+            <li> "Currency": "USD",</li>
+            <li> "VatInclusive": false,</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "M333W",</li>
+            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
+            <li> "UnitPrice": 11.56,</li>
+            <li> "Quantity": 1</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M222W",</li>
+            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
+            <li> "UnitPrice": 15.56,</li>
+            <li> "Quantity": 4</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "UnitPrice": 100.00,</li>
+            <li> "Quantity": 5</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h5>Example VAT order</h5>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ID": "M456WV",</li>
+            <li> "OrderStatus": "ReleasedForShipment",</li>
+            <li> "OrderDateUtc": "2017-05-26T05:06:26.4912802Z",</li>
+            <li> "BuyerAddress": {</li>
+            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
+            <li> "FirstName": "Watto",</li>
+            <li> "LastName": "Toydarian",</li>
+            <li> "AddressLine1": "321 Landing St.",</li>
+            <li> "City": "Mos Eisley",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "ME-123",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "Ste. 104",</li>
+            <li> "CompanyName": "Tosche Stations",</li>
+            <li> "DaytimePhone": "919-123-4567",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": "Jr."</li>
+            <li> },</li>
+            <li> "ShippingAddress": {</li>
+            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
+            <li> "FirstName": "Luke",</li>
+            <li> "LastName": "Skywalker",</li>
+            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
+            <li> "City": "Tuskan Territory",</li>
+            <li> "Country": "US",</li>
+            <li> "PostalCode": "TT-456",</li>
+            <li> "StateOrProvince": "NC",</li>
+            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
+            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
+            <li> "DaytimePhone": "480-987-6543",</li>
+            <li> "EveningPhone": null,</li>
+            <li> "NameSuffix": null</li>
+            <li> },</li>
+            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
+            <li> "DeliverByDateUtc": "2017-05-28T05:36:26.4912802Z",</li>
+            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
+            </li>
+            <li> "TotalPrice": 581.80,</li>
+            <li> "TotalTaxPrice": 5.00,</li>
+            <li> "TotalShippingPrice": 5.00,</li>
+            <li> "TotalShippingTaxPrice": 0.75,</li>
+            <li> "TotalGiftOptionPrice": 1.00,</li>
+            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
+            <li> "OtherFees": 2.00,</li>
+            <li> "Currency": "USD",</li>
+            <li> "VatInclusive": true,</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "M333W",</li>
+            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
+            <li> "UnitPrice": 11.56,</li>
+            <li> "Quantity": 1</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M222W",</li>
+            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
+            <li> "UnitPrice": 15.56,</li>
+            <li> "Quantity": 4</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "UnitPrice": 100.00,</li>
+            <li> "Quantity": 5</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+
+<h3>Special notes</h3>
+
+<h4>Repeated and split shipments</h4>
+<p>
+    To allow maximum flexibility, ChannelAdvisor offers sellers the ability to split items from a single order across
+    multiple
+    shipments. The seller can also send multiple updates for any given shipment. Please be aware that not all items in
+    an order
+    will necessarily be shipped together, and that you may receive a shipment update for an item/order more than once.
+</p>
+<p style="font-weight: bold;">Please design your system to accept this widely accepted process.</p>
+
+<h4>What to do when VAT amounts are unknown</h4>
+<p>
+    If your site receives an order that is VAT-inclusive, you are responsible for calculating how much the VAT amount
+    is for the purpose of representing the order in the API. If you do not have the exact VAT amount available, you
+    can do one of the following:
+</p>
+<ul>
+    <li>
+        <a style="font-weight: bold;">Look it up</a>
+        if you have a system you can retrieve the VAT amount from, this is preferable.
+    </li>
+    <li>
+        <a style="font-weight: bold;">Calculate / approximate it</a><br>
+        If you know or can estimate the VAT percentage, you can calculate approximately how much of the
+        amount paid was VAT tax.
+    </li>
+    <li>
+        <a style="font-weight: bold;">Do not send it</a><br>
+        If you have now way of looking up or calculating the VAT amount for the order, you may send
+        the order as a non-VAT order with a tax amount of 0. This places the burden of calculating the
+        VAT amount onto the seller, so it is not the preferred option, but it will work.
+    </li>
+</ul>
+
+

@@ -1,0 +1,72 @@
+<h1>Cancel order API Endpoint </h1>
+<blockquote>API endpoint information</blockquote>
+<h3>URL: https://{your.domain.com}/orders/{id}/cancel</h3>
+<h3>Method: POST</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Required</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>id</td>
+        <td class="text-center bg-info">True</td>
+        <td>The ID of the order to cancel</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Asynchronous response support</h3>
+<p>Voyageone currently supports only synchronous responses from this endpoint.</p>
+<h3>Description</h3>
+<p>Marks the specified items of the specified unshipped order as canceled. If there is no order with that ID, return
+    Error ID 6000 (OrderNotFound)</p>
+<h3>Request Format</h3>
+<p>This endpoint accepts a/n <a class="link" href="#/ng_api/api_r_m_ordercancellation">OrderCancellation</a> as its
+    request body (example below):</p>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "OrderID": "M456W",</li>
+            <li> "Items": [</li>
+            <li> {</li>
+            <li> "ID": "M333W",</li>
+            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
+            <li> "Quantity": 1,</li>
+            <li> "Reason": "BuyerCanceled"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M222W",</li>
+            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
+            <li> "Quantity": 2,</li>
+            <li> "Reason": "CustomerExchange"</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "ID": "M000W",</li>
+            <li> "SellerSku": "REBEL X-WING",</li>
+            <li> "Quantity": 3,</li>
+            <li> "Reason": "MerchandiseNotReceived"</li>
+            <li> }</li>
+            <li> ]</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>
+<h3>Response Format</h3>
+<p>This endpoint returns a/n <a class="link" href="#/ng_api/api_r_m_emptyobject">EmptyObject</a> as its response body
+    (example below):</p>
+<blockquote>
+    <div class="codehilite">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": {},</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

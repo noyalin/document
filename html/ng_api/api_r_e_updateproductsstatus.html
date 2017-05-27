@@ -1,0 +1,163 @@
+<h1>Update products status API Endpoint </h1>
+<blockquote>API endpoint information</blockquote>
+<h3>URL: https://{your.domain.com}/products/status</h3>
+<h3>Method: POST</h3>
+<p>This endpoint does not accept any URL parameters.</p>
+<h3>Asynchronous response support</h3>
+<p>Voyageone currently supports both synchronous and asynchronous responses from this endpoint.</p>
+<h3>Description</h3>
+<p>Updates the status of all products in the request body and returns a status for each change. Note that in this
+    endpoint, each buyable product is sent as its own product group, with the buyable product's SKU being sent at both
+    the group and the buyable level</p>
+<h3>Request Format</h3>
+<p>This endpoint accepts a/n <a class="link" href="#/ng_api/api_r_m_productgroup">ProductGroup</a> array as its request
+    body (example below):</p>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>[</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "Fields": [],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "Quantity": 0,</li>
+            <li> "ListingStatus": "NotLive",</li>
+            <li> "Fields": null</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "Fields": [],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "Quantity": 0,</li>
+            <li> "ListingStatus": "NotLive",</li>
+            <li> "Fields": null</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "Fields": [],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "Quantity": 0,</li>
+            <li> "ListingStatus": "NotLive",</li>
+            <li> "Fields": null</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "Fields": [],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "Quantity": 0,</li>
+            <li> "ListingStatus": "NotLive",</li>
+            <li> "Fields": null</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "Fields": [],</li>
+            <li> "BuyableProducts": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "Quantity": 0,</li>
+            <li> "ListingStatus": "NotLive",</li>
+            <li> "Fields": null</li>
+            <li> }</li>
+            <li> ]</li>
+            <li> }</li>
+            <li>]</li>
+        </ol>
+    </div>
+</blockquote>
+<h3>Response Format</h3>
+<p>This endpoint returns a/n <a class="link" href="#/ng_api/api_r_m_productgroupresult">ProductGroupResult</a> array as
+    its response body (example below):</p>
+<blockquote>
+    <div class="codehilite_ol_long">
+        <ol>
+            <li>{</li>
+            <li> "ResponseBody": [</li>
+            <li> {</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "REBEL X-WING",</li>
+            <li> "MarketPlaceItemID": null,</li>
+            <li> "URL": null,</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": []</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_MED",</li>
+            <li> "MarketPlaceItemID": null,</li>
+            <li> "URL": null,</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": []</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "LIGHTSABER_RED_LG",</li>
+            <li> "MarketPlaceItemID": null,</li>
+            <li> "URL": null,</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": []</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_MED",</li>
+            <li> "MarketPlaceItemID": null,</li>
+            <li> "URL": null,</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": []</li>
+            <li> },</li>
+            <li> {</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "BuyableProductResults": [</li>
+            <li> {</li>
+            <li> "RequestResult": "Success",</li>
+            <li> "SellerSKU": "LIGHTSABER_BLUE_LG",</li>
+            <li> "MarketPlaceItemID": null,</li>
+            <li> "URL": null,</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Errors": []</li>
+            <li> }</li>
+            <li> ],</li>
+            <li> "Status": "Complete",</li>
+            <li> "PendingUri": null,</li>
+            <li> "Errors": []</li>
+            <li>}</li>
+        </ol>
+    </div>
+</blockquote>

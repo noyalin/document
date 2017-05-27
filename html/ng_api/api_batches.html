@@ -1,0 +1,54 @@
+<!-- 文章开始 -->
+<h1>Batches</h1>
+<blockquote>Overview of the way that batch endpoints should be implemented.</blockquote>
+<h3>Purpose of Batching</h3>
+<p>
+    To facilitate the timely querying and processing of products and orders, the API specification is implemented
+    in a way that allows many endpoints to accept return a collection (batch) or elements in lieu of a single element.
+    This enables a higher throughput of product content, and
+    price / quantity updates, and orders between your system and the Voyageone application. Exactly how many elements to
+    put in each batch
+    request to the API is configurable, and will be provided by you to your Voyageone business contact during launch.
+    If your system cannot support processing multiple elements in a single request, this maximum batch size can be set
+    to one.
+</p>
+
+<h3>Special Notes</h3>
+<p>Please consider the following considerations when developing your API endpoints that process batches</p>
+
+<h4>Element-level errors</h4>
+<p>
+    All batch endpoints should return element-level errors (as opposed to response-level errors) where possible.
+    For more information on the distinction between these two error placements, please see the
+    <a class="link" href="#/ng_api/api_e_overview">Errors Overview</a> page.
+</p>
+
+<h4>One-to-One batch element matching</h4>
+<p>
+    Voyageone requires that there be a one-to-one matching between the elements in a request batch and the
+    elements in the response batch. This mapping is determined based on the unique identifier of the batch element
+    (SellerSKU for <a class="link" href="#/ng_api/api_r_m_productgroup">ProductGroup</a> / <a class="link"
+                                                                                              href="#/ng_api/api_r_m_buyableproduct">BuyableProduct</a>,
+    and
+    ID for <a class="link" href="#/ng_api/api_r_m_order">Order</a></code>). For example, if 3-item batch request is sent
+    to the
+    <a class="link" href="#/ng_api/api_r_e_createupdate">Create and update products</a> endpoint containing SellerSKUs
+    "ABC", "DEF", and "EFG" Voyageone would expect a 3-item response containing those same SellerSKUs.
+</p>
+
+<h4>Element IDs</h4>
+<p>
+    Please note that the identifier of the elements returned in the batch response must match the identifier of the
+    element
+    sent in the batch request exactly-- character for character. For example, if your system XML-encodes all SKUs when
+    storing them, and
+    your API is sent an item with SellerSKU "PURSE&amp;BAG" then the actual stored value in your database may be "PURSE&amp;amp;BAG."
+    Your API will need to handle cases like this where the value stored in your system differs from the value sent by
+    Voyageone
+    and both accept and return the value that was originally sent ("PURSE&amp;BAG") in all API responses.
+</p>
+<p>
+    Alternately, if reversing to the original value is not possible for your system, you may return an <a class="link"
+                                                                                                          href="#/ng_api/api_r_m_error">Error</a>
+    for that element in the batch indicating that the value is not valid per your system specifications.
+</p>
