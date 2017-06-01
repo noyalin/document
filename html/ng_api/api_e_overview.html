@@ -12,7 +12,7 @@
 
 <h3>Error types</h3>
 <p>
-    ChannelAdvisor internally classifies all errors it receives into two types: system errors and customer errors. The
+    Voyageone internally classifies all errors it receives into two types: system errors and customer errors. The
     behavior of
     the application, the communication to the seller, and the overall usability of the integration all depend on the
     type
@@ -34,9 +34,9 @@
     <div class="codehilite">
         <ol>
             <li>{</li>
-            <li> "ID": "SystemUnavailable",</li>
-            <li> "ErrorCode": "897",</li>
-            <li> "Message": "The API is currently down for maintenance."</li>
+            <li>    "ID": "SystemUnavailable", </li>
+            <li>    "ErrorCode": "897", </li>
+            <li>    "Message": "The API is currently down for maintenance."</li>
             <li>}</li>
         </ol>
     </div>
@@ -58,9 +58,9 @@
     <div class="codehilite">
         <ol>
             <li>{</li>
-            <li> "ID": "ProductFailedDataValidation",</li>
-            <li> "ErrorCode": "126",</li>
-            <li> "Message": "HTML tags are not allowed in the product description field."</li>
+            <li>    "ID": "ProductFailedDataValidation", </li>
+            <li>    "ErrorCode": "126", </li>
+            <li>    "Message": "HTML tags are not allowed in the product description field."</li>
             <li>}</li>
         </ol>
     </div>
@@ -96,17 +96,18 @@
     <div class="codehilite">
         <ol>
             <li>{</li>
-            <li> "ResponseBody": null,</li>
-            <li> "Status": "Failed",</li>
-            <li> "PendingUri": null,</li>
-            <li> "Errors": [</li>
-            <li> {</li>
-            <li> "ID": "SystemUnavailable",</li>
-            <li> "ErrorCode": "897",</li>
-            <li> "Message": "The API is currently down for maintenance."</li>
-            <li> }</li>
-            <li> ]</li>
+            <li>    "ResponseBody": null, </li>
+            <li>    "Status": "Failed", </li>
+            <li>    "PendingUri": null, </li>
+            <li>    "Errors": [</li>
+            <li>        {</li>
+            <li>            "ID": "SystemUnavailable", </li>
+            <li>            "ErrorCode": "897", </li>
+            <li>            "Message": "The API is currently down for maintenance."</li>
+            <li>        }</li>
+            <li>    ]</li>
             <li>}</li>
+            <li></li>
         </ol>
     </div>
 </blockquote>
@@ -133,35 +134,35 @@
     <div class="codehilite_ol_long">
         <ol>
             <li>{</li>
-            <li> "ResponseBody": [</li>
-            <li> {</li>
-            <li> "SellerSKU": "REBEL X-WING",</li>
-            <li> "BuyableProductResults": [</li>
-            <li> {</li>
-            <li> "RequestResult": "Success",</li>
-            <li> "SellerSKU": "REBEL X-WING",</li>
-            <li> "MarketPlaceItemID": "REBEL X-WING",</li>
-            <li> "URL": "http://your-url.com/products/REBEL X-WING",</li>
-            <li> "Errors": null</li>
-            <li> }</li>
-            <li> ],</li>
-            <li> "Errors": null</li>
-            <li> },</li>
-            <li> {</li>
-            <li> "SellerSKU": "SKU123",</li>
-            <li> "BuyableProductResults": [],</li>
-            <li> "Errors": [</li>
-            <li> {</li>
-            <li> "ID": "ProductFailedDataValidation",</li>
-            <li> "ErrorCode": "126",</li>
-            <li> "Message": "HTML tags are not allowed in the product description field."</li>
-            <li> }</li>
-            <li> ]</li>
-            <li> }</li>
-            <li> ],</li>
-            <li> "Status": "CompleteWithErrors",</li>
-            <li> "PendingUri": null,</li>
-            <li> "Errors": []</li>
+            <li>    "ResponseBody": [</li>
+            <li>        {</li>
+            <li>            "SellerSKU": "REBEL X-WING", </li>
+            <li>            "BuyableProductResults": [</li>
+            <li>                {</li>
+            <li>                    "RequestResult": "Success", </li>
+            <li>                    "SellerSKU": "REBEL X-WING", </li>
+            <li>                    "MarketPlaceItemID": "REBEL X-WING", </li>
+            <li>                    "URL": "http://your-url.com/products/REBEL X-WING", </li>
+            <li>                    "Errors": null</li>
+            <li>                }</li>
+            <li>            ], </li>
+            <li>            "Errors": null</li>
+            <li>        }, </li>
+            <li>        {</li>
+            <li>            "SellerSKU": "SKU123", </li>
+            <li>            "BuyableProductResults": [ ], </li>
+            <li>            "Errors": [</li>
+            <li>                {</li>
+            <li>                    "ID": "ProductFailedDataValidation", </li>
+            <li>                    "ErrorCode": "126", </li>
+            <li>                    "Message": "HTML tags are not allowed in the product description field."</li>
+            <li>                }</li>
+            <li>            ]</li>
+            <li>        }</li>
+            <li>    ], </li>
+            <li>    "Status": "CompleteWithErrors", </li>
+            <li>    "PendingUri": null, </li>
+            <li>    "Errors": [ ]</li>
             <li>}</li>
         </ol>
     </div>

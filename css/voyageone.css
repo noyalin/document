@@ -52,6 +52,14 @@ a {
     text-decoration: none;
 }
 
+a.red{
+    background: #EEAEEE;
+}
+
+a.noallowed{
+    cursor:not-allowed;
+}
+
 a.link{
     color:#337ab7 ;
 }
@@ -216,19 +224,17 @@ ul.menu li a.menu-now ul {
 /*artBox*/
 
 .artBox {
-    width: 900px;
+    width: 935px;
     line-height: 1.5em;
     position: relative;
     padding-left: 20px;
 }
 
 .artBox img {
-    max-width: 898px;
+    max-width: 920px;
     vertical-align: bottom;
-    margin: 0px;
-    border: 1.5px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 12.5px;
-    border-style: outset;
     margin: 12px 0;
 }
 
@@ -295,6 +301,8 @@ div p {
 .artBox ol li{
     list-style: decimal;!important;
     white-space:pre;
+    padding-left: 10px;
+    font-size: 12px;
 }
 
 .artBox ul {
@@ -358,9 +366,9 @@ div p {
 /* 区块背景色等样式 */
 
 .artBox blockquote {
-    padding: 0 15px;
+    background: #F7F7F7;
     color: #666;
-    border-left: 6px solid #ddd;
+    /*border-left: 6px solid #ddd;*/
 }
 
 /*代码区高亮显示 */
@@ -389,19 +397,25 @@ div p {
 }
 
 .artBox .codehilite {
-    padding: 2px 10px;
+    /*padding: 2px 20px;*/
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f7f7f7;
-    border-radius: 3px;
+    /*background-color: #f7f7f7;*/
+    /*border-radius: 3px;*/
+    padding: 10px 0 5px 33px;
+    margin: 10px 0;
+    border: 1px solid #CCC;
+    background: #F7F7F7 url(http://bbs.blueidea.com/static/image/common/codebg.gif) repeat-y 0 0;
 
 }
 
 .artBox .codehilite_ol_long {
-    padding: 2px 28px;
+    padding: 10px 0 5px 33px;
+    margin: 10px 0;
+    border: 1px solid #CCC;
+    background: #F7F7F7 url(http://bbs.blueidea.com/static/image/common/codebg.gif) repeat-y 0 0;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f7f7f7;
     border-radius: 3px;
     height:350px;
     overflow: scroll;
@@ -470,4 +484,12 @@ table td {
 .artBox th {
     color: white;
     background-color: #5d9cec;
+}
+
+#original_img{
+    position: absolute;
+    left:0;
+    top:0;
+    background: #000;
+    opacity: 0.4;
 }

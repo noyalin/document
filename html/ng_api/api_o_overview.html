@@ -2,7 +2,7 @@
 <blockquote>An overview of how the order API endpoints should be implemented</blockquote>
 <h3>Order Status Values</h3>
 <p>
-    This is an explanation of the purpose and meaning of the various ChannelAdvisor-defined
+    This is an explanation of the purpose and meaning of the various Voyageone-defined
     <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> values, and how orders will progress from one
     status to
     another over their lifetime.
@@ -26,7 +26,7 @@
                 an order in this status. Perhaps the payment has not yet been processed, or perhaps the order
                 is being processed through your site's buyer fraud/risk assessment. If there is any reason the
                 order should not be sent on to the seller to fulfill, the order should maintain the Pending status.
-                ChannelAdvisor will skip over orders that are in the pending state when downloading new orders to
+                Voyageone will skip over orders that are in the pending state when downloading new orders to
                 bring to the seller for fulfillment. If your site does no support the concept of pending orders,
                 you may return an empty list from the <a class="link" href="#/ng_api/api_r_e_getorders">Get orders</a>
                 endpoint when the <a class="link" href="#/ng_api/api_r_m_ordestatus">OrderStatus</a> passed to you is 1
@@ -43,7 +43,7 @@
                                                                          href="#/ng_api/api_r_m_ordestatus">OrderStatus</a>
                 of
                 2 / ReleasedForShipment. This indicates that the order has met all the site's
-                requirements and is now ready for the seller to fulfill. ChannelAdvisor will query for orders in this
+                requirements and is now ready for the seller to fulfill. Voyageone will query for orders in this
                 state
                 very frequently (about once every 15 minutes or so) and import the data of all orders in this state to
                 our system
@@ -57,7 +57,7 @@
         <td>3 / AcknowledgedBySeller</td>
         <td>
             <p>
-                Once ChannelAdvisor imports a 2 / ReleasedForShipment order into our system, we will
+                Once Voyageone imports a 2 / ReleasedForShipment order into our system, we will
                 immediately issue a call to your <a class="link" href="#/ng_api/api_r_e_acknowledge">Acknowledge
                 order</a> endpoint
                 to inform you that the order has been successfully imported. At this point, your API should set the
@@ -76,7 +76,7 @@
             <ul>
                 <li>Package up the order</li>
                 <li>Give the order to the carrier for delivery to the buyer</li>
-                <li>Mark the order as shipped in ChannelAdvisor (carrier and tracking information may or may not be
+                <li>Mark the order as shipped in Voyageone (carrier and tracking information may or may not be
                     supplied).
                 </li>
             </ul>
@@ -96,7 +96,7 @@
                 <span style="font-weight: bold;">NOTE</span><br>
                 A request to the <a class="link" href="#/ng_api/api_r_e_shiporder">Ship order</a> endpoint is a bit
                 different
-                from other endpoints. Usually, a POST request signifies that ChannelAdvisor is asking your system to do
+                from other endpoints. Usually, a POST request signifies that Voyageone is asking your system to do
                 something on behalf of
                 the seller (like list a product, pull down a product, refund an order, etc). However, in the case of
                 fulfillment, we are simply
@@ -146,7 +146,7 @@
         <td>6 / Canceled</td>
         <td>
             <p>
-                If the seller chooses not to fulfill an order, he will mark the order as canceled in the ChannelAdvisor
+                If the seller chooses not to fulfill an order, he will mark the order as canceled in the Voyageone
                 application.
                 Within a few minutes after he does this, we will issue a call to your
                 <a class="link" href="#/ng_api/api_r_e_cancelorder">Cancel order</a> endpoint
@@ -158,7 +158,7 @@
             </p>
             <p>
                 Because the math that sites use to calculate refunds/cancellation amounts varies greatly between
-                ChannelAdvisor's partners, a refund amount property is not provided to you in the
+                Voyageone's partners, a refund amount property is not provided to you in the
                 <a class="link" href="#/ng_api/api_r_e_cancelorder">Cancel order</a> and
                 <a class="link" href="#/ng_api/api_r_e_refundorder">Refund order</a> endpoint payloads.
                 You will be supplied with the SKU and the quantity to be refunded/canceled. It is up to your
@@ -172,7 +172,7 @@
 <!-- Order math and validation -->
 <h3>Order math and validation</h3>
 <p>
-    Before an order can by imported into ChannelAdvisor, it will be validated to ensure that all numeric
+    Before an order can by imported into Voyageone, it will be validated to ensure that all numeric
     values on the order add up correctly, and that all required properties have valid values. You may refer to
     the <a class="link" href="#/ng_api/api_r_m_order">Order</a> model page for the list of required properties. If a
     field is required,
@@ -188,72 +188,71 @@
     <div class="codehilite_ol_long">
         <ol>
             <li>{</li>
-            <li> "ID": "M456W",</li>
-            <li> "OrderStatus": "ReleasedForShipment",</li>
-            <li> "OrderDateUtc": "2017-05-26T05:06:26.4912802Z",</li>
-            <li> "BuyerAddress": {</li>
-            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
-            <li> "FirstName": "Watto",</li>
-            <li> "LastName": "Toydarian",</li>
-            <li> "AddressLine1": "321 Landing St.",</li>
-            <li> "City": "Mos Eisley",</li>
-            <li> "Country": "US",</li>
-            <li> "PostalCode": "ME-123",</li>
-            <li> "StateOrProvince": "NC",</li>
-            <li> "AddressLine2": "Ste. 104",</li>
-            <li> "CompanyName": "Tosche Stations",</li>
-            <li> "DaytimePhone": "919-123-4567",</li>
-            <li> "EveningPhone": null,</li>
-            <li> "NameSuffix": "Jr."</li>
-            <li> },</li>
-            <li> "ShippingAddress": {</li>
-            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
-            <li> "FirstName": "Luke",</li>
-            <li> "LastName": "Skywalker",</li>
-            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
-            <li> "City": "Tuskan Territory",</li>
-            <li> "Country": "US",</li>
-            <li> "PostalCode": "TT-456",</li>
-            <li> "StateOrProvince": "NC",</li>
-            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
-            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
-            <li> "DaytimePhone": "480-987-6543",</li>
-            <li> "EveningPhone": null,</li>
-            <li> "NameSuffix": null</li>
-            <li> },</li>
-            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
-            <li> "DeliverByDateUtc": "2017-05-28T05:36:26.4912802Z",</li>
-            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
-            </li>
-            <li> "TotalPrice": 587.05,</li>
-            <li> "TotalTaxPrice": 5.00,</li>
-            <li> "TotalShippingPrice": 5.00,</li>
-            <li> "TotalShippingTaxPrice": 0.75,</li>
-            <li> "TotalGiftOptionPrice": 1.00,</li>
-            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
-            <li> "OtherFees": 2.00,</li>
-            <li> "Currency": "USD",</li>
-            <li> "VatInclusive": false,</li>
-            <li> "Items": [</li>
-            <li> {</li>
-            <li> "ID": "M333W",</li>
-            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
-            <li> "UnitPrice": 11.56,</li>
-            <li> "Quantity": 1</li>
-            <li> },</li>
-            <li> {</li>
-            <li> "ID": "M222W",</li>
-            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
-            <li> "UnitPrice": 15.56,</li>
-            <li> "Quantity": 4</li>
-            <li> },</li>
-            <li> {</li>
-            <li> "ID": "M000W",</li>
-            <li> "SellerSku": "REBEL X-WING",</li>
-            <li> "UnitPrice": 100.00,</li>
-            <li> "Quantity": 5</li>
-            <li> }</li>
-            <li> ]</li>
+            <li>    "ID": "M456W", </li>
+            <li>    "OrderStatus": "ReleasedForShipment", </li>
+            <li>    "OrderDateUtc": "2017-06-01T04:32:58.9172802Z", </li>
+            <li>    "BuyerAddress": {</li>
+            <li>        "EmailAddress": "tatooine_sales@tosche-stations.com", </li>
+            <li>        "FirstName": "Watto", </li>
+            <li>        "LastName": "Toydarian", </li>
+            <li>        "AddressLine1": "321 Landing St.", </li>
+            <li>        "City": "Mos Eisley", </li>
+            <li>        "Country": "US", </li>
+            <li>        "PostalCode": "ME-123", </li>
+            <li>        "StateOrProvince": "NC", </li>
+            <li>        "AddressLine2": "Ste. 104", </li>
+            <li>        "CompanyName": "Tosche Stations", </li>
+            <li>        "DaytimePhone": "919-123-4567", </li>
+            <li>        "EveningPhone": null, </li>
+            <li>        "NameSuffix": "Jr."</li>
+            <li>    }, </li>
+            <li>    "ShippingAddress": {</li>
+            <li>        "EmailAddress": "orphanpilot1996@hotmail.com", </li>
+            <li>        "FirstName": "Luke", </li>
+            <li>        "LastName": "Skywalker", </li>
+            <li>        "AddressLine1": "654 Binary Sundet Dr.", </li>
+            <li>        "City": "Tuskan Territory", </li>
+            <li>        "Country": "US", </li>
+            <li>        "PostalCode": "TT-456", </li>
+            <li>        "StateOrProvince": "NC", </li>
+            <li>        "AddressLine2": "C/O \"The chosen one\"", </li>
+            <li>        "CompanyName": "Skywalker Evaporator Farms", </li>
+            <li>        "DaytimePhone": "480-987-6543", </li>
+            <li>        "EveningPhone": null, </li>
+            <li>        "NameSuffix": null</li>
+            <li>    }, </li>
+            <li>    "RequestedShippingMethod": "Bantha Union Express", </li>
+            <li>    "DeliverByDateUtc": "2017-06-03T05:02:58.9172802Z", </li>
+            <li>    "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf", </li>
+            <li>    "TotalPrice": 587.05, </li>
+            <li>    "TotalTaxPrice": 5, </li>
+            <li>    "TotalShippingPrice": 5, </li>
+            <li>    "TotalShippingTaxPrice": 0.75, </li>
+            <li>    "TotalGiftOptionPrice": 1, </li>
+            <li>    "TotalGiftOptionTaxPrice": 0.25, </li>
+            <li>    "OtherFees": 2, </li>
+            <li>    "Currency": "USD", </li>
+            <li>    "VatInclusive": false, </li>
+            <li>    "Items": [</li>
+            <li>        {</li>
+            <li>            "ID": "M333W", </li>
+            <li>            "SellerSku": "LIGHTSABER_BLUE_MED", </li>
+            <li>            "UnitPrice": 11.56, </li>
+            <li>            "Quantity": 1</li>
+            <li>        }, </li>
+            <li>        {</li>
+            <li>            "ID": "M222W", </li>
+            <li>            "SellerSku": "LIGHTSABER_RED_LG", </li>
+            <li>            "UnitPrice": 15.56, </li>
+            <li>            "Quantity": 4</li>
+            <li>        }, </li>
+            <li>        {</li>
+            <li>            "ID": "M000W", </li>
+            <li>            "SellerSku": "REBEL X-WING", </li>
+            <li>            "UnitPrice": 100, </li>
+            <li>            "Quantity": 5</li>
+            <li>        }</li>
+            <li>    ]</li>
             <li>}</li>
         </ol>
     </div>
@@ -264,72 +263,71 @@
     <div class="codehilite_ol_long">
         <ol>
             <li>{</li>
-            <li> "ID": "M456WV",</li>
-            <li> "OrderStatus": "ReleasedForShipment",</li>
-            <li> "OrderDateUtc": "2017-05-26T05:06:26.4912802Z",</li>
-            <li> "BuyerAddress": {</li>
-            <li> "EmailAddress": "tatooine_sales@tosche-stations.com",</li>
-            <li> "FirstName": "Watto",</li>
-            <li> "LastName": "Toydarian",</li>
-            <li> "AddressLine1": "321 Landing St.",</li>
-            <li> "City": "Mos Eisley",</li>
-            <li> "Country": "US",</li>
-            <li> "PostalCode": "ME-123",</li>
-            <li> "StateOrProvince": "NC",</li>
-            <li> "AddressLine2": "Ste. 104",</li>
-            <li> "CompanyName": "Tosche Stations",</li>
-            <li> "DaytimePhone": "919-123-4567",</li>
-            <li> "EveningPhone": null,</li>
-            <li> "NameSuffix": "Jr."</li>
-            <li> },</li>
-            <li> "ShippingAddress": {</li>
-            <li> "EmailAddress": "orphanpilot1996@hotmail.com",</li>
-            <li> "FirstName": "Luke",</li>
-            <li> "LastName": "Skywalker",</li>
-            <li> "AddressLine1": "654 Binary Sundet Dr.",</li>
-            <li> "City": "Tuskan Territory",</li>
-            <li> "Country": "US",</li>
-            <li> "PostalCode": "TT-456",</li>
-            <li> "StateOrProvince": "NC",</li>
-            <li> "AddressLine2": "C/O \"The chosen one\"",</li>
-            <li> "CompanyName": "Skywalker Evaporator Farms",</li>
-            <li> "DaytimePhone": "480-987-6543",</li>
-            <li> "EveningPhone": null,</li>
-            <li> "NameSuffix": null</li>
-            <li> },</li>
-            <li> "RequestedShippingMethod": "Bantha Union Express",</li>
-            <li> "DeliverByDateUtc": "2017-05-28T05:36:26.4912802Z",</li>
-            <li> "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf",
-            </li>
-            <li> "TotalPrice": 581.80,</li>
-            <li> "TotalTaxPrice": 5.00,</li>
-            <li> "TotalShippingPrice": 5.00,</li>
-            <li> "TotalShippingTaxPrice": 0.75,</li>
-            <li> "TotalGiftOptionPrice": 1.00,</li>
-            <li> "TotalGiftOptionTaxPrice": 0.25,</li>
-            <li> "OtherFees": 2.00,</li>
-            <li> "Currency": "USD",</li>
-            <li> "VatInclusive": true,</li>
-            <li> "Items": [</li>
-            <li> {</li>
-            <li> "ID": "M333W",</li>
-            <li> "SellerSku": "LIGHTSABER_BLUE_MED",</li>
-            <li> "UnitPrice": 11.56,</li>
-            <li> "Quantity": 1</li>
-            <li> },</li>
-            <li> {</li>
-            <li> "ID": "M222W",</li>
-            <li> "SellerSku": "LIGHTSABER_RED_LG",</li>
-            <li> "UnitPrice": 15.56,</li>
-            <li> "Quantity": 4</li>
-            <li> },</li>
-            <li> {</li>
-            <li> "ID": "M000W",</li>
-            <li> "SellerSku": "REBEL X-WING",</li>
-            <li> "UnitPrice": 100.00,</li>
-            <li> "Quantity": 5</li>
-            <li> }</li>
-            <li> ]</li>
+            <li>    "ID": "M456WV", </li>
+            <li>    "OrderStatus": "ReleasedForShipment", </li>
+            <li>    "OrderDateUtc": "2017-06-01T04:32:58.9172802Z", </li>
+            <li>    "BuyerAddress": {</li>
+            <li>        "EmailAddress": "tatooine_sales@tosche-stations.com", </li>
+            <li>        "FirstName": "Watto", </li>
+            <li>        "LastName": "Toydarian", </li>
+            <li>        "AddressLine1": "321 Landing St.", </li>
+            <li>        "City": "Mos Eisley", </li>
+            <li>        "Country": "US", </li>
+            <li>        "PostalCode": "ME-123", </li>
+            <li>        "StateOrProvince": "NC", </li>
+            <li>        "AddressLine2": "Ste. 104", </li>
+            <li>        "CompanyName": "Tosche Stations", </li>
+            <li>        "DaytimePhone": "919-123-4567", </li>
+            <li>        "EveningPhone": null, </li>
+            <li>        "NameSuffix": "Jr."</li>
+            <li>    }, </li>
+            <li>    "ShippingAddress": {</li>
+            <li>        "EmailAddress": "orphanpilot1996@hotmail.com", </li>
+            <li>        "FirstName": "Luke", </li>
+            <li>        "LastName": "Skywalker", </li>
+            <li>        "AddressLine1": "654 Binary Sundet Dr.", </li>
+            <li>        "City": "Tuskan Territory", </li>
+            <li>        "Country": "US", </li>
+            <li>        "PostalCode": "TT-456", </li>
+            <li>        "StateOrProvince": "NC", </li>
+            <li>        "AddressLine2": "C/O \"The chosen one\"", </li>
+            <li>        "CompanyName": "Skywalker Evaporator Farms", </li>
+            <li>        "DaytimePhone": "480-987-6543", </li>
+            <li>        "EveningPhone": null, </li>
+            <li>        "NameSuffix": null</li>
+            <li>    }, </li>
+            <li>    "RequestedShippingMethod": "Bantha Union Express", </li>
+            <li>    "DeliverByDateUtc": "2017-06-03T05:02:58.9172802Z", </li>
+            <li>    "ShippingLabelURL": "http://www.asapsystems.com/instructions/FAQ_FedEx_2D_Barcode_Information.pdf", </li>
+            <li>    "TotalPrice": 581.8, </li>
+            <li>    "TotalTaxPrice": 5, </li>
+            <li>    "TotalShippingPrice": 5, </li>
+            <li>    "TotalShippingTaxPrice": 0.75, </li>
+            <li>    "TotalGiftOptionPrice": 1, </li>
+            <li>    "TotalGiftOptionTaxPrice": 0.25, </li>
+            <li>    "OtherFees": 2, </li>
+            <li>    "Currency": "USD", </li>
+            <li>    "VatInclusive": true, </li>
+            <li>    "Items": [</li>
+            <li>        {</li>
+            <li>            "ID": "M333W", </li>
+            <li>            "SellerSku": "LIGHTSABER_BLUE_MED", </li>
+            <li>            "UnitPrice": 11.56, </li>
+            <li>            "Quantity": 1</li>
+            <li>        }, </li>
+            <li>        {</li>
+            <li>            "ID": "M222W", </li>
+            <li>            "SellerSku": "LIGHTSABER_RED_LG", </li>
+            <li>            "UnitPrice": 15.56, </li>
+            <li>            "Quantity": 4</li>
+            <li>        }, </li>
+            <li>        {</li>
+            <li>            "ID": "M000W", </li>
+            <li>            "SellerSku": "REBEL X-WING", </li>
+            <li>            "UnitPrice": 100, </li>
+            <li>            "Quantity": 5</li>
+            <li>        }</li>
+            <li>    ]</li>
             <li>}</li>
         </ol>
     </div>
@@ -339,7 +337,7 @@
 
 <h4>Repeated and split shipments</h4>
 <p>
-    To allow maximum flexibility, ChannelAdvisor offers sellers the ability to split items from a single order across
+    To allow maximum flexibility, Voyageone offers sellers the ability to split items from a single order across
     multiple
     shipments. The seller can also send multiple updates for any given shipment. Please be aware that not all items in
     an order

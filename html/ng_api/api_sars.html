@@ -15,14 +15,14 @@
 <h5>Example Synchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
 <blockquote>
     <div class="codehilite">
-        <ul>
-            <li>1.{</li>
-            <li>2.&nbsp;&nbsp; "ResponseBody": {},</li>
-            <li>3.&nbsp;&nbsp; "Status": "Complete",</li>
-            <li>4.&nbsp;&nbsp; "PendingUri": null,</li>
-            <li>5.&nbsp;&nbsp; "Errors": []</li>
-            <li>6. }</li>
-        </ul>
+        <ol>
+            <li>{</li>
+            <li>    "ResponseBody": { }, </li>
+            <li>    "Status": "Complete", </li>
+            <li>    "PendingUri": null, </li>
+            <li>    "Errors": [ ]</li>
+            <li>}</li>
+        </ol>
     </div>
 </blockquote>
 
@@ -33,45 +33,45 @@
     longer to process than is reasonable to wait for an HTTP response.
     In these cases, your API will return a null ResponseBody in its <a class="link"
                                                                        href="#/ng_api/api_r_m_actionresponse">ActionResponse</a>
-    and a fully-qualified URL for ChannelAdvisor to poll.
+    and a fully-qualified URL for Voyageone to poll.
 </p>
 
 <h5>Example Asynchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
 <blockquote>
     <div class="codehilite">
-        <ul>
-            <li>1.{</li>
-            <li>2.&nbsp;&nbsp; "ResponseBody": null,</li>
-            <li>3.&nbsp;&nbsp; "Status": "AsyncResponsePending",</li>
-            <li>4.&nbsp;&nbsp; "PendingUri": "http://api.your-url.com/v1/pending-responses?workItemID=123456",</li>
-            <li>5.&nbsp;&nbsp; "Errors": []</li>
-            <li>6. }</li>
-        </ul>
+        <ol>
+            <li>{</li>
+            <li>    "ResponseBody": null, </li>
+            <li>    "Status": "AsyncResponsePending", </li>
+            <li>    "PendingUri": "http://api.your-url.com/v1/pending-responses?workItemID=123456", </li>
+            <li>    "Errors": [ ]</li>
+            <li>}</li>
+        </ol>
     </div>
 </blockquote>
 
 <p>
-    ChannelAdvisor will poll that URL every few seconds until it returns a valid response with a finalized
+    Voyageone will poll that URL every few seconds until it returns a valid response with a finalized
     <a class="link" href="#/ng_api/api_r_m_responsestatus">ResponseStatus</a> (not 0 / AsyncResponsePending).
 </p>
 
 <h5>Example Finalized Asynchronous <a class="link" href="#/ng_api/api_r_m_actionresponse">ActionResponse</a></h5>
 <blockquote>
     <div class="codehilite">
-        <ul>
-            <li>1.{</li>
-            <li>2.&nbsp;&nbsp; "ResponseBody": {},</li>
-            <li>3.&nbsp;&nbsp; "Status": "Complete",</li>
-            <li>4.&nbsp;&nbsp; "PendingUri": null,</li>
-            <li>5.&nbsp;&nbsp; "Errors": []</li>
-            <li>6. }</li>
-        </ul>
+        <ol>
+            <li>{</li>
+            <li>    "ResponseBody": { }, </li>
+            <li>    "Status": "Complete", </li>
+            <li>    "PendingUri": null, </li>
+            <li>    "Errors": [ ]</li>
+            <li>}</li>
+        </ol>
     </div>
 </blockquote>
 
 <h3 id="async-timeout">Asynchronous Polling Timeout</h3>
 <p>
-    Because the ChannelAdvisor integration currently utilizes a synchronous feed process that waits for
+    Because the Voyageone integration currently utilizes a synchronous feed process that waits for
     asynchronous responses to complete, no other work can continue for a feed while the feed waits
     for the polling URL to return a final status. For this reason, all asynchronous repsonses must
     complete within the configured asynchronous response timeout window (5 minutes by default).
@@ -85,5 +85,5 @@
 </p>
 <p>
     If you find that a 5 minute timeout is insufficient for your system, please
-    <a class="link" href="mailto:channelsync+voyageone@channeladvisor.com">email your technical contact</a>.
+    <a class="link red" href="mailto:channelsync+voyageone@Voyageone.com">email your technical contact</a>.
 </p>
