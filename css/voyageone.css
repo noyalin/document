@@ -20,6 +20,7 @@ body {
     padding: 20px 0;
     color: #fff;
     font-size: 20px;
+    min-width: 1200px;
 }
 
 .header .nav_bar {
@@ -166,57 +167,36 @@ ul.menu li a:hover {
 }
 
 ul.menu-1 li a {
-    background: url(01.png) 10px center no-repeat;
-}
-
-ul.menu-2 li a {
-    background: url(01.png) 30px center no-repeat;
-}
-
-ul.menu-3 li a {
-    background: url(01.png) 50px center no-repeat;
+    background:no-repeat;
 }
 
 ul.menu-1 li a:hover {
-    background: url(01.png) 10px center no-repeat #ddecf4;
+    background: #ddecf4;
 }
 
 ul.menu-2 li a:hover {
-    background: url(01.png) 30px center no-repeat #ddecf4;
+    background:#ddecf4;
 }
 
 ul.menu-3 li a:hover {
-    background: url(01.png) 50px center no-repeat #ddecf4;
-}
-
-ul.menu-1 li a.openNow {
-    background: url(02.png) 10px center no-repeat;
+    background:#ddecf4;
 }
 
 ul.menu-1 li a.openNow:hover {
-    background: url(02.png) 10px center no-repeat #ddecf4;
-}
-
-ul.menu-2 li a.openNow {
-    background: url(02.png) 30px center no-repeat;
+    background: #ddecf4;
 }
 
 ul.menu-2 li a.openNow:hover {
-    background: url(02.png) 30px center no-repeat #ddecf4;
-}
-
-ul.menu-3 li a.openNow {
-    background: url(05.png) 10px center no-repeat;
+    background:#ddecf4;
 }
 
 ul.menu-3 li a.openNow:hover {
-    background: url(05.png) 10px center no-repeat #ddecf4;
+    background: #ddecf4;
 }
 
 ul.menu li ul {
     /*display: none;*/
 }
-
 ul.menu li a.menu-now ul {
     display: block;
 }
@@ -486,10 +466,47 @@ table td {
     background-color: #5d9cec;
 }
 
-#original_img{
+
+/*查看原图*/
+.small_img{
+    cursor: pointer;
+}
+
+#big_img_bg{
     position: absolute;
     left:0;
     top:0;
     background: #000;
-    opacity: 0.4;
+    opacity: 0.5;
+    display: none;
+}
+
+#big_img{
+    display: none;
+    position: absolute;
+    margin: 20px auto;
+    min-height: 150px;
+    padding: 35px;
+    background: #fff;
+    border: 5px solid #000;
+    -webkit-border-bottom-right-radius: 60px 60px;
+    -webkit-box-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
+
+}
+
+#big_img:before {
+    content: '';
+    width: 25px;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    -webkit-border-bottom-right-radius: 30px;
+    -webkit-box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.3);
+    -webkit-transform: rotate(-20deg) skew(-40deg,-3deg) translate(-13px,-13px);
+}
+
+#big_img img{
+    text-align: center;
+    cursor: pointer;
 }
